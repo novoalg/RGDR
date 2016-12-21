@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :blogs
+  resources :static_pages, :only => [:new, :create, :update]
+  get 'home', :to => 'static_pages#home'
+  get 'about_us', :to => 'static_pages#about_us'
+  get 'woofs_for_help', :to => 'static_pages#woofs_for_help'
+  get 'help', :to => 'static_pages#help'
+  get 'contact_us', :to => 'static_pages#contact_us'
+  resources :events
+  resources :users
+  root to: 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
