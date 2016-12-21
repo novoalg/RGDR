@@ -6,4 +6,3 @@ Ruby: 2.2.2
 Rails: 5
 Bootstrap: 4
 
-<tt>rake doc:app</tt>.
