@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_sidebar
 
   # GET /events
   # GET /events.json
@@ -73,7 +72,4 @@ class EventsController < ApplicationController
       params.fetch(:event, {})
     end
     
-    def set_sidebar
-      @sidebar = StaticPage.first.sidebar
-    end
 end

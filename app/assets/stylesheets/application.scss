@@ -17,16 +17,22 @@
 
 html, body {
     margin: 0;
-    padding: 25px;
+    padding: 0;
     height: 100%;
+    font-family: 'QuicksandOTF';
 }
 
+a {
+    font-family: 'QuicksandOTF';
+}
 .image {
     user-drag: none;
 }
 
 #background {
-    background: #FFF8EB;
+    //background: #FFF8EB;
+    background: url(/assets/stock_dog.jpg) no-repeat top right;
+    background-repeat: no-repeat;
     background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -37,25 +43,56 @@ html, body {
     color: #000000;
 }
 
-.navbar{
+.navbar {
     background-color: #EBFFEE;
-    opacity: 0.5;
+    opacity: 0.9;
 }
 
+.navbar-fixed-bottom {
+    background-color: #EBFFEE;
+    opacity: 1;
+    
+}
+
+a:hover {
+    background-color: transparent;
+}
 a.navbar-brand:hover, a.navbar-brand:focus {
     background-color: #f7f7f9;
     color: #000000;
 }
 
 .nopadding {
-    padding: 0 !important;
-    margin: 0 !important;
+    padding: 0;
+    margin: 0;
 }
 
 .content {
     background-color: #EBF2FF;
+    opacity: 0.9;
 }
 
 .sidebar {
     background-color: #FFEBFC;
+}
+
+.footer {
+    background-color: #C4C4C4;
+    opacity: 0.9;
+    height: 35px;
+    position: relative;
+    bottom: 0 !important;
+    margin: 0 !important;
+    width: 100%;
+}
+
+span {
+    margin-top: 3px;
+    vertical-align: middle;
+}
+
+//quicksand font
+@font-face {
+    font-family: 'QuicksandOTF';
+    src:url('/assets/Quicksand-Regular.otf');
 }

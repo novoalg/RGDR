@@ -1,6 +1,5 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  before_action :set_sidebar
 
   # GET /blogs
   # GET /blogs.json
@@ -73,7 +72,4 @@ class BlogsController < ApplicationController
       params.fetch(:blog, {})
     end
 
-    def set_sidebar
-      @sidebar = StaticPage.first.sidebar
-    end
 end

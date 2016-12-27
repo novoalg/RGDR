@@ -1,0 +1,11 @@
+<% if logged_in? %>
+    <span><h6><%= link_to "Profile", login_path %>|<%= link_to "Settings", edit_user_path(@current_user) %>|<%= link_to "Logout", logout_path, method: "delete" %></h6></span>
+<% else %>
+    <nav class="navbar navbar-fixed-bottom">
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <%= link_to "Login", login_path %>
+            </li>
+        </ul>
+    </nav>
+<% end %>

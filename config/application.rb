@@ -23,6 +23,9 @@ module RGDR
     # For Foundation 5
     config.assets.precompile += %w( vendor/modernizr )
 
+    config.assets.enable = true
+    #config.assets.path << File.join(Rails.root, 'app', 'assets', 'fonts')
+
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true

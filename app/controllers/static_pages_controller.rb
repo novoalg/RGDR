@@ -1,6 +1,5 @@
 class StaticPagesController < ApplicationController
   before_action :set_static_page, only: [:show, :edit, :update, :destroy]
-  before_action :set_sidebar
 
   #Editable Pages
   
@@ -104,7 +103,4 @@ class StaticPagesController < ApplicationController
       params.fetch(:static_page, {})
     end
 
-    def set_sidebar
-      @sidebar = StaticPage.first.sidebar
-    end
 end
