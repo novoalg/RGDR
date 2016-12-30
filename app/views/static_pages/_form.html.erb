@@ -1,17 +1,40 @@
-<%= form_for(@static_page) do |f| %>
-  <% if @static_page.errors.any? %>
+<div class="row">
+<%= form_for(@sp) do |f| %>
+  <% if @sp.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@static_page.errors.count, "error") %> prohibited this static_page from being saved:</h2>
+      <h2><%= pluralize(@sp.errors.count, "error") %> prohibited the '<%=@spname%>' page from being saved:</h2>
 
       <ul>
-      <% @static_page.errors.full_messages.each do |message| %>
+      <% @sp.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="col-lg-12">
+    <% if @spname == "Home" %>
+        <%= f.label @spname %>
+        <%= f.cktext_area :home_block_one, class: "form-control", ckeditor: {language: "us" } %>
+     
+    <% elsif @spname == "Contact Us" %>
+        <%= f.label @spname %>
+        <%= f.cktext_area :contact_us, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "About Us" %>
+        <%= f.label @spname %>
+        <%= f.cktext_area :about_us, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Woofs for Help" %>
+        <%= f.label @spname %>
+        <%= f.cktext_area :woofs_for_help, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Help" %>
+        <%= f.label @spname %>
+        <%= f.cktext_area :help, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Sidebar" %>
+        <%= f.label @spname %>
+        <%= f.cktext_area :sidebar, class: "form-control", ckeditor: {language: "us" } %>
+    <% end %>
+     <div class="actions">
+            <%= f.submit "Update" %>
+     </div>
   </div>
 <% end %>
+</div>

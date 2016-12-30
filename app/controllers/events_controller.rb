@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
+  include ApplicationHelper
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :has_access, only: [:new, :create, :update, :destroy]
 
   # GET /events
   # GET /events.json
@@ -54,7 +56,6 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }

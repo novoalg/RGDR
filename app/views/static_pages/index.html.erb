@@ -1,0 +1,38 @@
+<% title "Edit Pages - Real Good Dog Rescue" %>
+<h1>Editable Pages</h1>
+<div class="card-block">
+    <h4 class="card-title">Home:</h4>
+    <p class="card-text"><%= raw(@sp.home_block_one) %></p>
+    <%= link_to "Edit", home_edit_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card-block">
+    <h4 class="card-title">Sidebar:</h4>
+    <p class="card-text"><%= raw(@sp.sidebar) %></p>
+    <%= link_to "Edit", edit_sidebar_path, class: "btn btn-primary" %>
+
+</div>
+
+<div class="card-block">
+    <h4 class="card-title">About Us:</h4>
+    <p class="card-text"><%= raw(@sp.about_us) %></p>
+    <%= link_to "Edit", about_us_edit_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card-block">
+    <h4 class="card-title">Contact Us:</h4>
+    <p class="card-text"><%= raw(@sp.contact_us) %></p>
+    <%= link_to "Edit", contact_us_edit_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card-block">
+    <h4 class="card-title">Help:</h4>
+    <p class="card-text"><%= raw(@sp.help) %></p>
+    <%= link_to "Edit", help_edit_path, class: "btn btn-primary" %>
+</div>
+
+<div class="card-block">
+    <h4 class="card-title">Woofs For Help:</h4>
+    <p class="card-text"><%= raw(@sp.woofs_for_help) %></p>
+    <%= link_to "Edit", woofs_for_help_edit_path, class: "btn btn-primary" %>
+</div>

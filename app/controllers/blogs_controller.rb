@@ -1,5 +1,7 @@
 class BlogsController < ApplicationController
+  include ApplicationHelper
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
+  before_action :has_access, only: [:new, :create, :update, :destroy]
 
   # GET /blogs
   # GET /blogs.json

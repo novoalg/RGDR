@@ -12,65 +12,83 @@
   </head>
   <body id="background">
       <div class="container">
-          <div class="container-padding">
-                <div class="row">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-6">
-                        <h1 align="center"> Banner </h1>
-                    </div>
-                    <div class="col-lg-3"></div>
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <h1 align="center"> Banner </h1>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2"></div>
-                    <div class="col-lg-8 nopadding">
-                        <nav class="navbar navbar-light">
-                          <a class="navbar-brand" href="/"><%= image_tag "rgdr_logo.png", size: "30x30", :class => "image" %></a>
-                          <ul class="nav navbar-nav">
-                            <li class="nav-item active">
-                              <%= link_to "Home", root_path, :class => "nav-link" %>
-                            </li>
-                            <li class="nav-item">
-                              <%= link_to "About Us", about_us_path , :class => "nav-link"%>
-                            </li>
-                            <li class="nav-item">
-                              <%= link_to "Upcoming Events", events_path , :class => "nav-link"%>
-                            </li>
-                            <li class="nav-item">
-                              <%= link_to "Happy Tails", blogs_path , :class => "nav-link"%>
-                            </li>
-                            <li class="nav-item">
-                              <%= link_to "Woofs for Help", woofs_for_help_path , :class => "nav-link"%>
-                            </li>
-                          </ul>
-                          <ul class="nav navbar-nav float-lg-right">
-                            <li class="nav-item">
-                              <%= link_to "Helpful Info", help_path , :class => "nav-link"%>
-                            </li>
-                            <li class="nav-item">
-                              <%= link_to "Contact Us", contact_us_path , :class => "nav-link"%>
-                            </li>
-                          </ul>
-                        </nav>
-                    </div>
-                    <div class="col-lg-2"></div>
+                <div class="col-lg-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8 nopadding">
+                    <nav class="navbar navbar-light">
+                      <a class="navbar-brand" href="/"><%= image_tag "rgdr_logo.png", size: "30x30", :class => "image" %></a>
+                      <ul class="nav navbar-nav">
+                        <li class="nav-item active">
+                          <%= link_to "Home", root_path, :class => "nav-link" %>
+                        </li>
+                        <li class="nav-item">
+                          <%= link_to "About Us", about_us_path , :class => "nav-link"%>
+                        </li>
+                        <li class="nav-item">
+                          <%= link_to "Upcoming Events", events_path , :class => "nav-link"%>
+                        </li>
+                        <li class="nav-item">
+                          <%= link_to "Happy Tails", blogs_path , :class => "nav-link"%>
+                        </li>
+                        <li class="nav-item">
+                          <%= link_to "Woofs for Help", woofs_for_help_path , :class => "nav-link"%>
+                        </li>
+                      </ul>
+                      <ul class="nav navbar-nav float-lg-right">
+                        <li class="nav-item">
+                          <%= link_to "Helpful Info", help_path , :class => "nav-link"%>
+                        </li>
+                        <li class="nav-item">
+                          <%= link_to "Contact Us", contact_us_path , :class => "nav-link"%>
+                        </li>
+                      </ul>
+                    </nav>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2 nopadding">
-                    <div class="jumbotron sidebar">
-                            <%= render partial: "static_pages/sidebar" %>
-                        </div>
+                <div class="col-lg-2"></div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-2 nopadding">
+                <div class="jumbotron sidebar">
+                        <%= render partial: "static_pages/sidebar" %>
                     </div>
-                    <div class="col-lg-8 nopadding">
-                        <div class="container-body">
-                            <div class="jumbotron content">
-                                <%= yield %>
-                            </div>
-                            <%= render partial: "static_pages/footer" %>
-                        </div>
+                </div>
+                <div class="col-lg-8 nopadding">
+                    <div class="jumbotron content">
+                        <%= flash_messages %>
+                        <%= yield %>
                     </div>
-                    <div class="col-lg-2"></div>
+                    <%= render partial: "static_pages/footer" %>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+            <!-- debug panel -->
+            <div class="row">
+                <div class="col-md-3">
+                </div>
+
+                <% if ENV["RAILS_ENV"] != "production" %>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">Debug Parameters</div>
+                      <div class="panel-body">
+                        <%= debug(params) %>
+                      </div>
+                    </div>
+                </div>
+                <% end %>
+
+                <div class="col-md-3">
                 </div>
             </div>
+
         </div>
 
     </body>

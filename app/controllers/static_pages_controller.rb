@@ -1,11 +1,12 @@
 class StaticPagesController < ApplicationController
+  include ApplicationHelper
   before_action :set_static_page, only: [:show, :edit, :update, :destroy]
+  before_action :has_access, except: [:home, :about_us, :woofs_for_help, :help, :contact_us]
 
   #Editable Pages
-  
+   
   def home
     @debug = params
-    @title = "Real Good Dog Rescue"
     logger.info "*************"
     params.each do |k, v|
         puts "#{k} : #{v}"
@@ -31,10 +32,42 @@ class StaticPagesController < ApplicationController
     @help = StaticPage.first.contact_us
   end
 
+
+  #Edit GET requests
+  def edit_home 
+    @sp = StaticPage.first
+    @spname = "Home"
+  end
+
+  def edit_about_us
+    @sp = StaticPage.first
+    @spname = "About Us"
+  end
+
+  def edit_woofs_for_help
+    @sp = StaticPage.first
+    @spname = "Woofs for Help"
+  end
+
+  def edit_help
+    @sp = StaticPage.first
+    @spname = "Help"
+  end
+
+  def edit_contact_us
+    @sp = StaticPage.first
+    @spname = "Contact Us"
+  end
+
+  def edit_sidebar
+    @sp = StaticPage.first
+    @spname = "Sidebar"
+  end
+
+
   # GET /static_pages
-  # GET /static_pages.json
   def index
-    @static_pages = StaticPage.all
+    @sp = StaticPage.first
   end
 
   # GET /static_pages/1
@@ -49,6 +82,8 @@ class StaticPagesController < ApplicationController
 
   # GET /static_pages/1/edit
   def edit
+        #flash[:warning] = "This page cannot be edited or does not exist"
+        #redirect_to static_pages_path
   end
 
   
@@ -59,7 +94,7 @@ class StaticPagesController < ApplicationController
 
     respond_to do |format|
       if @static_page.save
-        format.html { redirect_to @static_page, notice: 'Static page was successfully created.' }
+        format.html { redirect_to @static_page }
         format.json { render :show, status: :created, location: @static_page }
       else
         format.html { render :new }
@@ -71,13 +106,15 @@ class StaticPagesController < ApplicationController
   # PATCH/PUT /static_pages/1
   # PATCH/PUT /static_pages/1.json
   def update
+    @sp = @static_page
     respond_to do |format|
       if @static_page.update(static_page_params)
-        format.html { redirect_to @static_page, notice: 'Static page was successfully updated.' }
-        format.json { render :show, status: :ok, location: @static_page }
+        flash[:success] = "Page updated successfully."
+        format.html { redirect_to static_pages_path }
+        format.json { render :show, status: :ok, location: static_pages_path }
       else
-        format.html { render :edit }
-        format.json { render json: @static_page.errors, status: :unprocessable_entity }
+        flash[:error] = "Page cannot be blank."
+        format.html { redirect_to static_pages_path }
       end
     end
   end
@@ -85,9 +122,8 @@ class StaticPagesController < ApplicationController
   # DELETE /static_pages/1
   # DELETE /static_pages/1.json
   def destroy
-    @static_page.destroy
     respond_to do |format|
-      format.html { redirect_to static_pages_url, notice: 'Static page was successfully destroyed.' }
+      format.html { redirect_to root_path } 
       format.json { head :no_content }
     end
   end
@@ -101,6 +137,8 @@ class StaticPagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def static_page_params
       params.fetch(:static_page, {})
+      params.require(:static_page).permit(:about_us, :contact_us, :help, :sidebar, :home_block_one, :woofs_for_help)
     end
+
 
 end
