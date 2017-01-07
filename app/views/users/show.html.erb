@@ -1,5 +1,5 @@
 <% title "Profile - Real Good Dog Rescue" %>
-<h1><%="#{@user.first_name} #{@user.last_name}"%></h1>
+<h1><%= @user.full_name %></h1>
 <h5>Email: <%=@user.email%></h5>
 <h5>Age: <%=@user.age%></h5>
 <h5>Address Line 1: <%=@user.address_line_one%></h5>

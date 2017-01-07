@@ -7,6 +7,7 @@
     <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
     <%= stylesheet_link_tag    "application" %>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
@@ -21,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-2"></div>
-                <div class="col-lg-8 nopadding">
+                <div class="col-lg-10 nopadding">
                     <nav class="navbar navbar-light">
                       <a class="navbar-brand" href="/"><%= image_tag "rgdr_logo.png", size: "30x30", :class => "image" %></a>
                       <ul class="nav navbar-nav">
@@ -51,23 +52,21 @@
                       </ul>
                     </nav>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
             
             <div class="row">
                 <div class="col-lg-2 nopadding">
-                <div class="jumbotron sidebar">
+                    <div class="jumbotron sidebar">
                         <%= render partial: "static_pages/sidebar" %>
                     </div>
                 </div>
-                <div class="col-lg-8 nopadding">
+                <div class="col-lg-10 nopadding">
                     <div class="jumbotron content">
                         <%= flash_messages %>
                         <%= yield %>
                     </div>
                     <%= render partial: "static_pages/footer" %>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
             <!-- debug panel -->
             <div class="row">

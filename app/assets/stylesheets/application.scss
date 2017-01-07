@@ -11,9 +11,11 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require dataTables/jquery.dataTables
  *= require_self
  */
- @import "bootstrap";
+@import "bootstrap";
+
 
 html, body {
     margin: 0;
@@ -30,8 +32,9 @@ a {
 }
 
 #background {
-    //background: #FFF8EB;
-    background: url(/assets/stock_dog.jpg) no-repeat top right;
+    background: #FFF8EB;
+    //background: url(/assets/stock_dog.jpg) no-repeat top right;
+    background: url(/assets/bg-dog.jpg) no-repeat top right;
     background-repeat: no-repeat;
     background-size: cover;
     -moz-background-size: cover;
@@ -74,7 +77,7 @@ a.navbar-brand:hover, a.navbar-brand:focus {
 
 .sidebar {
     //background-color: #FFEBFC;
-    background-color: #EBF2FF;
+    background-color: #D5E0F0;
     padding-top: 50px;
     padding-bottom: 50px;
     padding-left: 5px;

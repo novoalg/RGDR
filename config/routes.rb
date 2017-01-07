@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   get 'edit_sidebar', :to => 'static_pages#edit_sidebar'
   resources :events
   resources :users
+  get '/user/:id/user_management', to: 'users#hierarchy'
+  post '/user/:id/user_management', to: 'users#set_hierarchy'
   post '/users/set_state', to: 'users#set_state'
+  resources :comments
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

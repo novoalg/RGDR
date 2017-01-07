@@ -1,0 +1,42 @@
+<h1><%= "Editing #{@user.full_name} Hierarchy" %></h1>
+<div class="col-2-lg"></div>
+<div class="col-10-lg">
+    <div class="form-group">
+        <%= form_tag url: "user/#{@user.id}/user_management", as: :post do %>
+            <% if @user.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                  <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <%= render @user %>
+            <div class="form-check">
+               <div class="bs-callout bs-callout-danger">
+                    <h4>Admin</h4>
+                    <%= radio_button_tag "user_h", "admin" %>
+                    This will make user able to have access to all features including: Edit Pages, Change user permissions, Create/Edit/Delete blog posts.
+               </div>
+            </div>
+            <div class="form-check">
+                <div class="bs-callout bs-callout-info">
+                    <h4>Moderator</h4>
+                    <%= radio_button_tag "user_h", "moderator" %>
+                    This will make user limited to only: Manage users who post comments on blogs.
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="bs-callout bs-callout-success">
+                    <h4>Member</h4>
+                    <%= radio_button_tag "user_h", "member" %>
+                    This will make user limited to just browse the website and only being able to post comments blogs or events.
+                </div>
+            </div>
+            <%= submit_tag "Submit" %>
+    <% end %>
+    </div>
+</div>

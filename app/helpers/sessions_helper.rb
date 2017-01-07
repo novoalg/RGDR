@@ -20,6 +20,19 @@ module SessionsHelper
         !current_user.nil?
     end
 
+    def admin?
+        current_user.hierarchy == 0
+    end
+
+    def moderator?
+        current_user.hierarchy == 1
+    end
+
+    def member?
+        current_user.hierarchy == 2    
+    end
+
+
     def log_out
         forget(current_user)
         session.delete(:user_id)

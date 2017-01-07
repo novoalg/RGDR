@@ -31,16 +31,32 @@ module ApplicationHelper
     end
 
     def has_access
-
-#        logger.info "******************"
-#        logger.info current_user
-#        logger.info "******************"
         true
-        if current_user.nil?
+        if current_user.nil? 
             flash[:error] = "You do not have permission to do that. Please log in"
             redirect_to login_path
         end
     end
 
+    def has_access_admin
+        true
+        if current_user.nil?
+            flash[:error] = "You do not have permission to do that. Please log in"
+            redirect_to login_path
+        elsif current_user.hierarchy > 0
+            flash[:error] = "You do not have permission to do that."
+            redirect_to root_path
+        end
+    end
 
+    def has_access_moderator
+        true
+        if current_user.nil?
+            flash[:error] = "You do not have permission to do that. Please log in"
+            redirect_to login_path
+        elsif current_user.hierarchy > 1
+            flash[:error] = "You do not have permission to do that."
+            redirect_to root_path
+        end
+    end
 end

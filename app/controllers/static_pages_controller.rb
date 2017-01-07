@@ -1,18 +1,17 @@
 class StaticPagesController < ApplicationController
   include ApplicationHelper
   before_action :set_static_page, only: [:show, :edit, :update, :destroy]
-  before_action :has_access, except: [:home, :about_us, :woofs_for_help, :help, :contact_us]
+  before_action :has_access_admin, except: [:home, :about_us, :woofs_for_help, :help, :contact_us]
 
   #Editable Pages
    
   def home
     @debug = params
-    logger.info "*************"
     params.each do |k, v|
         puts "#{k} : #{v}"
     end
-    logger.info "Rails env: #{Rails.env}"
-    logger.info "*************"
+    #logger.info "Rails env: #{Rails.env}"
+    #logger.info "*************"
     @homeblockone = StaticPage.first.home_block_one
   end
 

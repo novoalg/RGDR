@@ -7,10 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'faker'
 
+#admin
     User.create(
         first_name: "Bob", 
         last_name: "Burger", 
-        age: 45, email: "bob@b.com", 
+        age: 45, email: "admin@b.com", 
         address_line_one: "Burger Avenue", 
         address_line_two: "", 
         city: "Collierville", 
@@ -21,6 +22,39 @@ require 'faker'
         password_confirmation: "asdasd", 
         hierarchy: 0
     )
+
+#moderator
+    User.create(
+        first_name: "Lisa", 
+        last_name: "Burger", 
+        age: 55, email: "mod@b.com", 
+        address_line_one: "Burger Avenue", 
+        address_line_two: "", 
+        city: "Germantown", 
+        state: "TN", 
+        zip: "38012", 
+        phone: "1114240000", 
+        password: "asdasd", 
+        password_confirmation: "asdasd", 
+        hierarchy: 1
+    )
+
+#member
+     User.create(
+        first_name: "Tina", 
+        last_name: "Burger", 
+        age: 15, email: "member@b.com", 
+        address_line_one: "Burger Avenue", 
+        address_line_two: "", 
+        city: "Cordova", 
+        state: "TN", 
+        zip: "38012", 
+        phone: "1114640000", 
+        password: "asdasd", 
+        password_confirmation: "asdasd", 
+        hierarchy: 2
+    )
+ 
 
     StaticPage.create(
         about_us: Faker::Lorem.paragraph, 
