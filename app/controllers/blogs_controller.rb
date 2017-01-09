@@ -2,6 +2,7 @@ class BlogsController < ApplicationController
   include ApplicationHelper
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
   before_action :has_access_admin, except: [:show, :index]
+  before_action :inactive_blog_visibility, only: [:show]
 
   # GET /blogs
   # GET /blogs.json
@@ -94,4 +95,19 @@ class BlogsController < ApplicationController
         params.require(:blog).permit(:title, :user_id, :content)
     end
 
+    def inactive_blog_visibility
+        @blog = Blog.find_by_id(params[:id])
+        if @blog.active
+            true
+        else
+            if current_user && current_user.admin?
+                true
+            else
+                false
+                flash[:info] = "You cannot see inactive posts."
+                redirect_to blogs_path
+            end
+        end
+    end
+    
 end
