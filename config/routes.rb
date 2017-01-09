@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   resources :blogs
+  get '/blogs_management', to: "blogs#management"
+  post 'blogs/:id/toggle', to: "blogs#toggle_active"
   resources :static_pages, :only => [:index, :edit, :create, :update]
   get 'home', :to => 'static_pages#home'
   get 'home/edit', :to => 'static_pages#edit_home'

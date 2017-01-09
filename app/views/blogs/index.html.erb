@@ -1,1 +1,8 @@
 <% title "Happy Tails - Real Good Dog Rescue" %>
+<% @blogs.each do |blog| %>
+    <h2><%= link_to blog.title, blog %></h2>
+    <%= raw(blog.content) %>
+    <span id="blog-date">
+        <%= blog.localtime %>
+    </span>
+<% end %>

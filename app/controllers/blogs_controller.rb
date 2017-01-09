@@ -1,12 +1,12 @@
 class BlogsController < ApplicationController
   include ApplicationHelper
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  before_action :has_access, only: [:new, :create, :update, :destroy]
+  before_action :has_access_admin, except: [:show, :index]
 
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @blogs = Blog.where(active: true).order(created_at: :desc)
   end
 
   # GET /blogs/1
@@ -16,21 +16,41 @@ class BlogsController < ApplicationController
 
   # GET /blogs/new
   def new
-    @blog = Blog.new
+    @blog = current_user.blogs.new 
   end
 
   # GET /blogs/1/edit
   def edit
+
+  end
+
+  def toggle_active
+    @blog = Blog.find_by_id(params[:id])
+    if @blog.active 
+        @blog.update_attribute(:active, false)
+    else 
+        @blog.update_attribute(:active, true)
+    end
+    #cheeky one line if statement
+    flash[:info] = "Blog as been #{(@blog.active) ? "activated" : "deactivated"}"
+    redirect_to blogs_management_path
+  end
+
+  def management
+    @inactive_blogs = Blog.where(active: false).order(created_at: :desc)
+    @blogs = Blog.where(active: true).order(created_at: :desc)
   end
 
   # POST /blogs
   # POST /blogs.json
   def create
-    @blog = Blog.new(blog_params)
-
+    #create blog based on current user logged in
+    @blog = current_user.blogs.new(blog_params)
+    @blog.active = 1
     respond_to do |format|
       if @blog.save
-        format.html { redirect_to @blog, notice: 'Blog was successfully created.' }
+        flash[:success] = "Blog was created successfully."
+        format.html { redirect_to @blog }
         format.json { render :show, status: :created, location: @blog }
       else
         format.html { render :new }
@@ -44,7 +64,8 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
+        flash[:success] = "Blog updated successfully."
+        format.html { redirect_to @blog } 
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit }
@@ -56,7 +77,6 @@ class BlogsController < ApplicationController
   # DELETE /blogs/1
   # DELETE /blogs/1.json
   def destroy
-    @blog.destroy
     respond_to do |format|
       format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
       format.json { head :no_content }
@@ -66,12 +86,12 @@ class BlogsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
-      @blog = Blog.find(params[:id])
+      @blog = Blog.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.fetch(:blog, {})
+        params.require(:blog).permit(:title, :user_id, :content)
     end
 
 end

@@ -3,7 +3,7 @@
         <nav class="navbar navbar-fixed-bottom">
             <ul class="nav navbar-nav">
                 <li class="nav-item">
-                    <%= link_to "Profile", user_path(current_user) %>|<%= link_to "Settings", edit_user_path(@current_user) %>|<%= link_to "Manage Users", users_path %>|<%= link_to "Edit Pages", static_pages_path %>|<%= link_to "Blog Management", blogs_path %>|<%= link_to "Logout", logout_path, method: "delete" %>
+                    <%= link_to "Profile", user_path(current_user) %>|<%= link_to "Settings", edit_user_path(@current_user) %>|<%= link_to "Users Management", users_path %>|<%= link_to "Edit Pages", static_pages_path %>|<%= link_to "Blogs Management", blogs_management_path %>|<%= link_to "Logout", logout_path, method: "delete" %>
                 </li>
             </ul>
         </nav>

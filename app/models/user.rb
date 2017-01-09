@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
-    has_many :posts
+    has_many :blogs
 
     attr_accessor :remember_token
     VALID_AGE_REGEX = /\A[0-9][0-9]?[0-9]?\Z/
@@ -47,6 +47,10 @@ class User < ActiveRecord::Base
 
     def format_phone
         "(" + self.phone[0..2] + ")" + self.phone[3..5] + "-" + phone[6..9]
+    end
+
+    def admin?
+        self.hierarchy == 0
     end
 
     class << self

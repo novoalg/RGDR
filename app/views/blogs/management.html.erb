@@ -1,0 +1,37 @@
+<h1 align="center">Active Blogs</h1>
+<% if @blogs.any? %>
+    <% @blogs.each do |blog| %>
+        <div class="bs-callout bs-callout-success">
+            <h4>Title: <%= blog.title %></h4>
+            <h5>Created by: <%= blog.user.full_name %></h5>
+            <%= raw(blog.content) %>
+            <%= form_for blog, url: "blogs/#{blog.id}/toggle", method: :post do |f| %>
+                <%= f.submit "Deactivate" %>
+            <% end %>
+        </div>
+    <% end %>
+<% else %>
+    <div class="bs-callout bs-callout-info">
+        <p>There are no active blogs</p>
+    </div>
+<% end %>
+
+<h1 align="center">Inactive Blogs</h1>
+<% if @inactive_blogs.any? %>
+    <% @inactive_blogs.each do |blog| %>
+        <div class="bs-callout bs-callout-danger">
+            <h4>Title: <%= blog.title %></h4>
+            <h5>Created by: <%= blog.user.full_name %></h5>
+            <%= raw(blog.content) %>
+            <%= form_for blog, url: "blogs/#{blog.id}/toggle", method: :post do |f| %>
+                <%= f.submit "Activate" %>
+            <% end %>
+        </div>
+    <% end %>
+<% else %>
+    <div class="bs-callout bs-callout-info">
+        <p>There are no inactive blogs</p>
+    </div>
+<% end %>
+
+

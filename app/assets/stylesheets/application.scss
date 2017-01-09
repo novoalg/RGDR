@@ -34,12 +34,13 @@ a {
 #background {
     background: #FFF8EB;
     //background: url(/assets/stock_dog.jpg) no-repeat top right;
-    background: url(/assets/bg-dog.jpg) no-repeat top right;
+    background: url(/assets/rgdr_logo.png) no-repeat;
     background-repeat: no-repeat;
-    background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -webkit-background-size: cover;
+    background-size: 500px 500px;
+    background-position: 50% 50%;
+    //-moz-background-size: cover;
+    //-o-background-size: cover;
+    //-webkit-background-size: cover;
 }
 .nav > li > a:hover, .nav > li > a:focus { 
     background-color: #EBFFEE;
@@ -100,8 +101,14 @@ span {
     vertical-align: middle;
 }
 
+#blog-date {
+    font-size: 8pt;
+    font-color: #DBDBDB;
+}
+
 //quicksand font
 @font-face {
     font-family: 'QuicksandOTF';
     src:url('/assets/Quicksand-Regular.otf');
 }
+
