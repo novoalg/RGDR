@@ -18,6 +18,9 @@ gem 'city-state'
 #CSS
 gem 'bootstrap'
 
+#Pagination
+gem 'will_paginate', '>= 3.1'
+
 #CkEditor
 gem 'ckeditor'
 gem 'paperclip'

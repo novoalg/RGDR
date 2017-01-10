@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170109090437) do
+ActiveRecord::Schema.define(version: 20170110083253) do
 
   create_table "blogs", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -35,15 +35,23 @@ ActiveRecord::Schema.define(version: 20170109090437) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string  "content"
-    t.integer "reply_id"
-    t.integer "user_id"
-    t.integer "blog_id"
+    t.string   "content"
+    t.integer  "reply_id"
+    t.integer  "user_id"
+    t.integer  "blog_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "name"
+    t.string   "location"
+    t.string   "time"
+    t.string   "information"
+    t.boolean  "special"
+    t.date     "date"
   end
 
   create_table "static_pages", force: :cascade do |t|

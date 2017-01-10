@@ -1,0 +1,15 @@
+<% if event.special %>
+    <div class="bs-callout bs-callout-warning">
+<% else %>
+    <div class="bs-callout bs-callout-primary">
+<% end %>
+    <% if current_user && current_user.admin? %>
+        <%= link_to "Edit Event", edit_event_path(event) %>
+    <% end %>
+    <h1 align="center"><%= event.name %></h1>
+    <h5>Location: <%= event.location %></h5>
+    <h5>Time: <%= event.time %></h5>
+    <h5>Date: <%= event.date_format %></h5>
+    <%= raw(event.information) %>
+</div>
+

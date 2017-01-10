@@ -1,8 +1,13 @@
 <% title "Happy Tails - Real Good Dog Rescue" %>
-<% @blogs.each do |blog| %>
-    <h2><%= link_to blog.title, blog %></h2>
-    <%= raw(blog.content) %>
-    <span id="blog-date">
-        <%= blog.localtime %>
-    </span>
+<% if current_user && current_user.admin? %>
+    <%= link_to "Create New Blog", new_blog_path %>
+<% end %>
+<% if @blogs.nil? %>
+    <div class="bs-callout bs-callout-info">
+        There are no blogs available
+    </div>
+<% else %>
+    <% @blogs.each do |blog| %>
+        <%= render blog, object: blog %>
+    <% end %>
 <% end %>

@@ -1,17 +1,38 @@
+<div class="row">
 <%= form_for(@blog) do |f| %>
-    <% if @blog.errors.any? %>
-        <div id="error_explanation">
-            <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this form from being saved:</h2>
-            <ul>
-            <% @blog.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-            </ul>
+    <div class="bs-callout bs-callout-warning">
+        <h4>Warning:</h4>
+        Make sure to select if the blog is active or not. If the blog is active it will show on the website, otherwise you can deactivate it.
+    </div>
+    <div class="col-lg-6">
+        <% if @blog.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this form from being saved:</h2>
+                <ul>
+                <% @blog.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+                </ul>
+            </div>
+        <% end %>
+        <%= f.label "Title" %>
+        <%= f.text_field :title, class: "form-control" %>
+        <%= f.label "Active" %>
+        <br/>
+        <%= f.label "Yes" %>
+        <%= f.radio_button :active, true %>
+        <%= f.label "No" %>
+        <%= f.radio_button :active, false%>
+    </div>
+    <div class="col-lg-6"></div>
+    <div class="row">
+        <div class="col-lg-12">
+            <%= f.label "Content" %>
+            <%= f.cktext_area :content, class: "form-control", ckeditor: {language: "us" } %>
+            <div class="actions" style="margin-top: 5px;">
+                <%= f.submit %>
+            </div>
         </div>
-    <% end %>
-    <%= f.label "Title" %>
-    <%= f.text_field :title, class: "form-control" %>
-    <%= f.label "Content" %>
-    <%= f.cktext_area :content, class: "form-control", ckeditor: {language: "us" } %>
-    <%= f.submit %>
+    </div>
 <% end %>
+</div>

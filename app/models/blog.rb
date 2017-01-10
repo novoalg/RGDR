@@ -8,6 +8,10 @@ class Blog < ActiveRecord::Base
     validates :user_id, presence: true
 
     def localtime
-        self.created_at.localtime.strftime("%m/%d/%Y. At %I:%M %p")
+        "Posted on #{self.created_at.localtime.strftime("%m/%d/%Y. At %I:%M %p")}. By #{self.user.full_name}"
+    end
+
+    def updated_time
+        "Last updated #{self.updated_at.localtime.strftime("%m/%d/%Y. At %I:%M %p")}"
     end
 end

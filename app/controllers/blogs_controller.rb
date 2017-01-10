@@ -8,13 +8,18 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
     @blogs = Blog.where(active: true).order(created_at: :desc)
+    logger.info "*********************************"
+    logger.info @blogs.inspect
+    logger.info "*********************************"
   end
 
   # GET /blogs/1
   # GET /blogs/1.json
   def show
-    @comments = @blog.comments
+    @comments = @blog.comments.order(created_at: :desc)
     logger.info "**************************"
+    logger.info "COMMENTS"
+    logger.info @comments.inspect
     logger.info @comments.inspect
     logger.info @comments.empty?
     logger.info @comments.any?

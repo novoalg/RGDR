@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   include ApplicationHelper
+  require 'will_paginate/array'
   before_action :set_static_page, only: [:show, :edit, :update, :destroy]
   before_action :has_access_admin, except: [:home, :about_us, :woofs_for_help, :help, :contact_us]
 
@@ -13,19 +14,12 @@ class StaticPagesController < ApplicationController
     #logger.info "Rails env: #{Rails.env}"
     #logger.info "*************"
     @homeblockone = StaticPage.first.home_block_one
+#parse XML
     url = "http://api.adoptapet.com/search/pets_at_shelter?key=56f8d6ec5a75c3a28c5893fad35d250f&shelter_id=82425"
     uri = URI(url)
     response = Net::HTTP.get(uri)
     @hash = Hash.from_xml(response) 
     @pets = @hash["result"]["pets"]
-    logger.info "***********************************"
-    logger.info "***********************************"
-    logger.info "***********************************"
-    logger.info "ALL PETS"
-    logger.info @pets
-    logger.info "***********************************"
-    logger.info "***********************************"
-    logger.info "***********************************"
     @details_hash = {}
     @pets.each_with_index do |pet, i|
 #url format http://www.adoptapet.com/pet/PET_ID-PET_CITY-PET_STATE-PET_PRIMARY_BREED-MIX
@@ -40,12 +34,7 @@ class StaticPagesController < ApplicationController
         @pet_url += "-mix"
         @details_hash["#{i}"] = @pet_url
     end
-    logger.info "***********************************"
-    logger.info "***********************************"
-    logger.info "***********************************"
-    logger.info "DETAILS HASH"
-    logger.info @details_hash
-    logger.info "***********************************"
+    #@pets = @pets.search(params[:pets], params[:page]) 
   end
 
   def about_us

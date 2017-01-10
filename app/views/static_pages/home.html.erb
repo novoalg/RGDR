@@ -1,7 +1,7 @@
 <% title "Real Good Dog Rescue" %>
 <%= render partial: "home_block_one" %>
 <h1 align="center">Adoptable Pets at Real Good Dog Rescue</h1>
-<div class="row">
+<div class="row" align="center" style="margin-left: 28px;">
     <% pointer_i = 0 %>
     <% @pets.each_with_index do |pet, i| %>
         <% if (i % 3 == 0) %>
@@ -9,22 +9,30 @@
             <% pointer_i = i %>
         <% end %>
         <% pointer_i += 1%>
-        <div class="col-lg-4">
-            <div class="pet-container">
-                <%= image_tag pet["large_results_photo_url"], style: "margin: 0 auto; display: block;" %>
-                <h5 align="center">
-                <%= link_to "#{pet["pet_name"].capitalize},", "#{@details_hash["#{i}"]}"%>
-                <%= pet["age"].capitalize %></h5>
-                <% if pet["secondary_breed"].empty? %>
-                    <h5 align="center"><%= "#{pet["primary_breed"].capitalize}" %></h5>
-                <% else %>
-                    <h5 align="center"><%= "#{pet["primary_breed"].capitalize}, #{pet["secondary_breed"].capitalize}" %></h5>
-                <% end %>
-            </div>
+        <div class="col-lg-4 pet-container">
+            <%= link_to image_tag(pet["large_results_photo_url"], style: "margin: 0; display: block; padding-bottom: 10px;"), "#{@details_hash["#{i}"]}" %>
+            <p align="center">
+            <%= link_to "#{pet["pet_name"].capitalize}", "#{@details_hash["#{i}"]}"%> -
+            <%= pet["age"].capitalize %></p>
+            <% if pet["secondary_breed"].empty? %>
+                <p align="center"><%= "#{pet["primary_breed"].capitalize}" %></p>
+            <% else %>
+                <p align="center"><%= "#{pet["primary_breed"].capitalize}, #{pet["secondary_breed"].capitalize}" %></p>
+            <% end %>
         </div>
-        <% if (pointer_i % 3== 0) %>
-            </div>
-            <br>
+        <% if pointer_i == (@pets.size)%>
+            <% if (pointer_i % 3 == 1) %>
+               <div class="col-lg-4"></div> 
+               <div class="col-lg-4"></div> 
+               </div>
+            <% elsif (pointer_i % 3 == 2) %>
+               <div class="col-lg-4"></div> 
+               </div>
+            <% end %>
+        <% else %>
+            <% if (pointer_i % 3== 0) %>
+                </div>
+            <% end %>
         <% end %>
     <% end %>
 </div>

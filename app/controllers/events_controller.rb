@@ -1,12 +1,17 @@
 class EventsController < ApplicationController
   include ApplicationHelper
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :has_access, only: [:new, :create, :update, :destroy]
+  before_action :has_access, only: [:show, :index]
+  before_action :has_access_admin, except: [:show, :index]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.where(special: false).order(created_at: :asc)
+  end
+
+  def special_events
+    @events = Event.where(special: true).order(created_at: :asc)
   end
 
   # GET /events/1
@@ -27,10 +32,10 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        flash[:success] = "Event #{@event.name} was created successfully."
+        format.html { redirect_to events_path }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -44,7 +49,8 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        flash[:success] = "Event updated successfully."
+        format.html { redirect_to @event }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -65,12 +71,13 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.find_by_id(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.fetch(:event, {})
+      #params.fetch(:event, {})
+      params.require(:event).permit(:name, :location, :time, :date, :special, :information)
     end
     
 end

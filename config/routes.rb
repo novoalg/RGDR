@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'contact_us/edit', :to => 'static_pages#edit_contact_us'
   get 'edit_sidebar', :to => 'static_pages#edit_sidebar'
   resources :events
+  get 'special_events', :to => "events#special_events"
   resources :users
   get '/user/:id/user_management', to: 'users#hierarchy'
   post '/user/:id/user_management', to: 'users#set_hierarchy'

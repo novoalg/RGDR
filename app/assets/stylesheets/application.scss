@@ -22,11 +22,22 @@ html, body {
     padding: 0;
     height: 100%;
     font-family: 'QuicksandOTF';
+    color: white;
 }
 
 a {
     font-family: 'QuicksandOTF';
+    color: white;
 }
+
+a:visited {
+    color: rgb(196, 203, 255);
+}
+
+a:hover {
+    color: #FFAE00;
+}
+
 .image {
     user-drag: none;
 }
@@ -37,33 +48,46 @@ a {
     background: url(/assets/rgdr_logo.png) no-repeat;
     background-repeat: no-repeat;
     background-size: 500px 500px;
-    background-position: 50% 50%;
+    background-position: 50% 100%;
     //-moz-background-size: cover;
     //-o-background-size: cover;
     //-webkit-background-size: cover;
 }
 .nav > li > a:hover, .nav > li > a:focus { 
-    background-color: #EBFFEE;
-    color: #000000;
+    color: rgb(0, 0, 0);
+    //color: black;
+    //color: #000000;
 }
 
 .navbar {
-    background-color: #EBFFEE;
-    opacity: 0.9;
+    background-color: #FFAE00;
+    font-weight: bold;
+    font-size: 20pt;
+    opacity: 1;
 }
 
 .navbar-fixed-bottom {
-    background-color: #EBFFEE;
+    background-color: #222222;
     opacity: 1;
     
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: black;
 }
 
 a:hover {
     background-color: transparent;
 }
+
 a.navbar-brand:hover, a.navbar-brand:focus {
-    background-color: #f7f7f9;
-    color: #000000;
+    color: red;
+    //background-color: #f7f7f9;
+    //color: #000000;
 }
 
 .nopadding {
@@ -72,25 +96,28 @@ a.navbar-brand:hover, a.navbar-brand:focus {
 }
 
 .content {
-    background-color: #EBF2FF;
+    background-color: #123456;
     opacity: 0.9;
+    margin-bottom: 0 !important;
 }
 
 .sidebar {
     //background-color: #FFEBFC;
-    background-color: #D5E0F0;
+    background-color: #123456;
     padding-top: 50px;
     padding-bottom: 50px;
     padding-left: 5px;
     padding-right: 5px;
+    margin-bottom: 0 !important;
 }
 
 
 .footer {
-    background-color: #C4C4C4;
-    opacity: 0.9;
+    background-color: #222222;
+    opacity: 1;
     height: 35px;
     position: relative;
+    color: #FFAE00;
     bottom: 0 !important;
     margin: 0 !important;
     width: 100%;
@@ -106,11 +133,17 @@ span {
     font-color: #DBDBDB;
 }
 
+.blog-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
 .comment {
    padding: 10px;
    margin: 15px 0;
    margin-left: 20px;
    margin-right: 20px;
+   color: black;
    //width: 80%;
    border: 1px solid #B5B4B4;
    border-radius: 3px;
@@ -129,14 +162,54 @@ span {
 }
 
 .pet-container {
-    border: 2px solid black;
+    border: 2px solid rgb(176, 176, 176);
     border-radius: 3px;
-    background-color: white;
-    padding: 10px;
+    background-color: #FFFFFF;
+    color: black;
+    padding: 20px;
     margin: 15px;
     display: table-cell;
-    width: 25%;
+    width: 29%;
 
+}
+
+.pet-container p {
+    font-size: 12pt;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin: 0;
+}
+
+.pet-container a:visited {
+    color: #FFAE00;
+}
+
+.pet-container a {
+    color: #FFAE00;
+}
+
+.banner {
+    width: 100%;
+    display: table-cell;
+    position: relative;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+h2.banner-h2 {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+    padding-left: 50px;
+    color: white;
+    background-color: black;
+    font: bold 24px/45px Helvetica, Sans-Serif;
+    opacity: 0.8;
 }
 //quicksand font
 @font-face {
@@ -144,3 +217,29 @@ span {
     src:url('/assets/Quicksand-Regular.otf');
 }
 
+footer {
+    display: block;
+    width: 100%;
+    height: 100px;
+    font-size: 8pt;
+    font-color: grey;
+    background-color: #2E2E2E;
+    padding-top: 20px;
+    bottom: 0 !important;
+    margin: 0 !important;
+}
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  color: black;
+}
+
+#full-comments {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #DBDBDB;
+}

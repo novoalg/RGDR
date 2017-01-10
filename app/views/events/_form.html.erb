@@ -1,17 +1,44 @@
-<%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<div class="row">
+    <%= form_for(@event) do |f| %>
+        <div class="col-lg-6">
+          <% if @event.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+              <ul>
+              <% @event.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+          
+          <%= f.label :location %>
+          <%= f.text_field :location, class: "form-control" %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+          <%= f.label :time %>
+          <%= f.text_field :time, class: "form-control" %>
+
+          <%= f.label :date %>
+          <%= f.date_field :date, class: "form-control" %>
+
+          <%= f.label :special, "Special Event?", style: "padding-top: 0.70rem;"%><br>
+          <%= f.label "Yes" %>
+          <%= f.radio_button :special, true %>
+          <%= f.label "No" %>
+          <%= f.radio_button :special, false %>
+
+          </div>
+          <div class="col-lg-6"></div>
+          <div class="col-lg-12">
+              <%= f.label :information, style: "padding-top: 0.70rem;" %>
+              <%= f.cktext_area :information, class: "form-control", ckeditor: { language: "us" } %>
+
+              <div class="actions" style="margin-top: 5px;">
+                <%= f.submit "Submit" %>
+              </div>
+          </div>
+    <% end %>
+</div>
