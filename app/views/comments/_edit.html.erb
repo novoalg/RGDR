@@ -1,0 +1,19 @@
+<% @edit_comment = Comment.new %>
+<%= form_for(@edit_comment) do |f| %>
+  <% if @edit_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@edit_comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @edit_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.text_area :content, value: @edit_comment.content %>
+
+  <div class="actions">
+    <%= f.submit "Edit Comment" %>
+  </div>
+<% end %>

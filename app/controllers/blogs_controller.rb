@@ -13,6 +13,14 @@ class BlogsController < ApplicationController
   # GET /blogs/1
   # GET /blogs/1.json
   def show
+    @comments = @blog.comments
+    logger.info "**************************"
+    logger.info @comments.inspect
+    logger.info @comments.empty?
+    logger.info @comments.any?
+    logger.info @comments.blank?
+    logger.info "**************************"
+    @new_comment = @blog.comments.new(blog_id: @blog.id)
   end
 
   # GET /blogs/new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108234619) do
+ActiveRecord::Schema.define(version: 20170109090437) do
 
   create_table "blogs", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170108234619) do
     t.string  "content"
     t.integer "reply_id"
     t.integer "user_id"
-    t.integer "post_id"
+    t.integer "blog_id"
   end
 
   create_table "events", force: :cascade do |t|

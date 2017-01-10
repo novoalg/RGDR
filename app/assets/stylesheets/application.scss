@@ -106,6 +106,38 @@ span {
     font-color: #DBDBDB;
 }
 
+.comment {
+   padding: 10px;
+   margin: 15px 0;
+   margin-left: 20px;
+   margin-right: 20px;
+   //width: 80%;
+   border: 1px solid #B5B4B4;
+   border-radius: 3px;
+   border-left-width: 5px;
+   background-color: #EBEBEB;
+}
+
+.comment-user {
+    color: #2C1FA3;
+    font-weight: bold;
+    font-size: 8pt;
+}
+
+.comment-footer {
+    font-size: 8pt;
+}
+
+.pet-container {
+    border: 2px solid black;
+    border-radius: 3px;
+    background-color: white;
+    padding: 10px;
+    margin: 15px;
+    display: table-cell;
+    width: 25%;
+
+}
 //quicksand font
 @font-face {
     font-family: 'QuicksandOTF';

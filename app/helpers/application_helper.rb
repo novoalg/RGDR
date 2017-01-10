@@ -30,6 +30,28 @@ module ApplicationHelper
         nil
     end
 
+    #Same user showing editing/updating profile
+    def same_user
+        if current_user 
+            if (current_user.id == params[:id].to_i) || (current_user.hierarchy < 1)
+                true
+            else
+                if request.xhr?
+                    flash[:error] = "You don't have permission to do that."
+                    render :js => "window.location = '#{root_path}';"
+                else
+                    flash[:error] = "You don't have permission to do that."
+                    redirect_to root_path
+                end
+            end 
+        else
+            flash[:error] = "You don't have permission to do that. Please log in"
+            redirect_to login_path
+        end
+    end
+
+
+
     def has_access
         true
         if current_user.nil? 

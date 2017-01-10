@@ -13,6 +13,39 @@ class StaticPagesController < ApplicationController
     #logger.info "Rails env: #{Rails.env}"
     #logger.info "*************"
     @homeblockone = StaticPage.first.home_block_one
+    url = "http://api.adoptapet.com/search/pets_at_shelter?key=56f8d6ec5a75c3a28c5893fad35d250f&shelter_id=82425"
+    uri = URI(url)
+    response = Net::HTTP.get(uri)
+    @hash = Hash.from_xml(response) 
+    @pets = @hash["result"]["pets"]
+    logger.info "***********************************"
+    logger.info "***********************************"
+    logger.info "***********************************"
+    logger.info "ALL PETS"
+    logger.info @pets
+    logger.info "***********************************"
+    logger.info "***********************************"
+    logger.info "***********************************"
+    @details_hash = {}
+    @pets.each_with_index do |pet, i|
+#url format http://www.adoptapet.com/pet/PET_ID-PET_CITY-PET_STATE-PET_PRIMARY_BREED-MIX
+#MIX is included if it has a secondary breed
+#state has to be uppercase converted to symbol to look for full state name using CS gem
+        state = pet["addr_state_code"].parameterize.upcase.to_sym
+        breed = pet["primary_breed"]
+#make breed lower case
+        trimmed_breed = breed.downcase.gsub(/^[^a-z0-9\s]/i, '')
+        trimmed_breed = trimmed_breed.tr(' ', '-')
+        @pet_url = "http://www.adoptapet.com/pet/"+pet["pet_id"]+"-"+pet["addr_city"].downcase+"-"+CS.states(:us)[state].downcase+"-"+trimmed_breed
+        @pet_url += "-mix"
+        @details_hash["#{i}"] = @pet_url
+    end
+    logger.info "***********************************"
+    logger.info "***********************************"
+    logger.info "***********************************"
+    logger.info "DETAILS HASH"
+    logger.info @details_hash
+    logger.info "***********************************"
   end
 
   def about_us

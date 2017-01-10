@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     states = CS.states(:us)
+    logger.info states.inspect
     @states = []
     @cities = CS.cities(:ak, :us)
     states.each do |k, v|
@@ -182,22 +183,6 @@ class UsersController < ApplicationController
         end
 
     end
-
-    #Same user showing editing/updating profile
-    def same_user
-        if current_user 
-            if (current_user.id == params[:id].to_i) || (current_user.hierarchy < 1)
-                true
-            else
-                flash[:error] = "You don't have permission to do that."
-                redirect_to root_path
-            end 
-        else
-            flash[:error] = "You don't have permission to do that. Please log in"
-            redirect_to login_path
-        end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       #params.fetch(:user, {})

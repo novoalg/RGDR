@@ -1,4 +1,66 @@
+<% title "#{@blog.title} - Real Good Dog Rescue" %>
 <%= render @blog %>
-<% if current_user && current_user.admin? %>
-    <%= link_to 'Edit', edit_blog_path(@blog) %>
+<% if current_user %>
+    <div class="row">
+        <div class="col-lg-5">
+            <%= form_for @new_comment, url: { action: "create", controller: "comments", :blog_id => @blog.id } do |f| %>
+                <%= f.text_area :content, class: "form-control" %>
+                <%= f.submit %>
+            <% end %>
+        </div>
+        <div class="col-lg-7"></div>
+    </div>
+<% else %>
+        <% if @comments.empty? %>
+            <div class="bs-callout bs-callout-info">
+                There are no comments here
+            </div>
+        <% else %>
+            <% @comments.each do |comment| %>
+                <% #I had to use this ridiculous hack because the form kept fucking up %>
+                <% if comment.id != nil %>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="frame">
+                                <div class="comment" >
+                                    <h5 class="comment-user" ><%= comment.user.full_name %></h5>
+                                    <div id=<%="comment-#{comment.id}"%>><%= comment.content %></div>
+                                    <% if comment.user == current_user %> 
+                                        <a id=<%="edit-#{comment.id}"%> class="edit comment-footer">Edit</a>
+                                    <% end %> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %>
+
 <% end %>
+<% if current_user && current_user.admin? %>
+    <%= link_to 'Edit Blog', edit_blog_path(@blog) %>
+<% end %>
+
+<script>
+    $(document).ready(function() {
+        $('#frame a').click(function(){
+            var user_id = $(this).attr("id");
+            var arr = user_id.split('-');
+            var comment_id = arr[1];
+            var comment = $('#comment-'+comment_id);
+            $('#edit-'+arr[1]).hide();
+            comment.empty();
+            event.preventDefault();
+            return $.ajax({
+                url: '/comments/'+comment_id+'/edit',
+                type: 'get',
+                data: {
+                    edit_comment_id: comment_id
+                },
+                success: function(data){
+                    comment.append(data)
+                }
+            });
+        });
+    });
+</script>
