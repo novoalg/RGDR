@@ -1,0 +1,175 @@
+<% title "Adopt - Real Good Dog Rescue" %>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="bs-callout bs-callout-warning">
+<p>
+RGDR Adoption Application
+NOTE TO SERIOUS ADOPTERS
+</p>
+<p>
+Please submit our adoption application so that we can work to pre-approve you as an adoption applicant. The number of inquiries we are getting means that we cannot answer multiple email and phone questions about adoptable pets listed on our website. As a pre-approved adoption applicant, however, you move to the head of the adoption line and we are happy to answer specific questions you have!
+</p>
+<p>
+Important information to know about our adoption process:
+</p>
+<p>
+1. We seek stable, responsible, loving homes who can provide all necessary care for a pet.
+</p>
+<p>
+2. We HEAVILY weigh your VET REFERENCE. This is an unbiased source of information on prior pet care. Please provide thorough information about your vet. In TN you MUST call your vet and give permission for the vet to release information to us before we can complete the application review.
+</p>
+<p>
+3. We also love HOME OWNERS with FENCED YARDS, since renters are often told they cannot have certain pets or cannot control noise level where there are shared walls.
+</p>
+<p>
+4. Where there are multiple people in the same household, we are looking for COMPATIBILITY and AGREEMENT among ALL RESIDENTS that a pet is welcome in the home. Roommate situations often provide for failed placement when someone "was just not into" getting a dog.
+</p>
+<p>
+Please fill in all of the requested information on the form below. Items marked with a red asterisk must be completed.
+</p>
+<p>
+If an item is not applicable to you, please state NONE or N/A so that your application will be appropriately processed.
+</p>
+<p>
+Your care in providing complete and accurate information is appreciated so that we can do our due diligence in processing your application. 
+</p>
+    
+            <%= form_tag("/send_adoption", { method: :post}) do %>
+              <% if !@errors.empty? %>
+                <div id="error_explanation">
+                  <h2><%= @errors.count %>errors prohibited this form from being saved:</h2>
+
+                  <ul>
+                  <% @errors.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <%= label_tag "Name of dog or puppy you're interested in adopting." %>
+              <%= text_field_tag "dog_name", nil, class: "form-control" %>
+
+              <%= label_tag "Your first name" %>
+              <%= text_field_tag "first_name", nil, class: "form-control" %>
+              <%= label_tag "Your last name" %>
+              <%= text_field_tag "last_name", nil, class: "form-control" %>
+              
+              <%= label_tag "Your age" %>
+              <%= text_field_tag "age", nil, class: "form-control" %>
+
+              <%= label_tag "Adress" %>
+              <%= label_tag "Street Address" %>
+              <%= text_field_tag "street_adress", nil, class: "form-control" %>
+              <%= label_tag "Street Adress Line Two" %>
+              <%= text_field_tag "street_adress_line_two", nil, class: "form-control" %>
+              <%= label_tag "City" %>
+              <%= text_field_tag "city", nil, class: "form-control" %>
+              <%= label_tag "State" %>
+              <%= text_field_tag "state", nil, class: "form-control" %>
+              <%= label_tag "ZIP" %>
+              <%= text_field_tag "zip", nil, class: "form-control" %>
+
+              <%= label_tag "Preferred Phone Number" %>
+              <%= text_field_tag "pref_phone_number", nil, class: "form-control" %>
+              <%= label_tag "Secondary Phone Number" %>
+              <%= text_field_tag "sec_phone_number", nil, class: "form-control" %>
+
+              <%= label_tag "Email Address" %>
+              <%= email_field_tag "email", nil, class: "form-control" %>
+
+              <%= label_tag "What other pets do you have? " %>
+              <%= text_area_tag "pets", nil, class: "form-control" %>
+
+              <%= label_tag "What other people live in your household?" %>
+              <%= text_area_tag "household", nil, class: "form-control" %>
+
+              <%= label_tag "Do you live in an apartment or house?" %>
+              <br/>
+              <%= label_tag "House" %>
+              <%= radio_button_tag "building", "house" %>
+              <br/>
+              <%= label_tag "Apartment" %>
+              <%= radio_button_tag "building", "apartment" %>
+              <br/>
+
+              <%= label_tag "Do you own or rent?" %>
+              <br/>
+              <%= label_tag "Own" %>
+              <%= radio_button_tag "payment", "own" %>
+              <br/>
+              <%= label_tag "Rent" %>
+              <%= radio_button_tag "payment", "rent" %>
+              <br/>
+
+              <%= label_tag "Describe where this pet will be kept during the day and at night." %>
+              <%= text_area_tag "pet_sleep", nil, class: "form-control" %>
+              
+              <%= label_tag "During a normal day, how many hours will this pet be unattended(left alone)?" %>
+              <%= number_field_tag "unattended", nil, within: 0..24, class: "form-control" %>
+
+              <%= label_tag "Do you have a fenced yard?" %>
+              <br/>
+              <%= label_tag "Yes" %>
+              <%= radio_button_tag "fenced", true %>
+              <br/>
+              <%= label_tag "No" %>
+              <%= radio_button_tag "fenced", false%>
+              <br/>
+
+              <%= label_tag "Can you afford a pet?" %>
+              <br/>
+              <%= label_tag "Yes" %>
+              <%= radio_button_tag "afford", true %>
+              <br/>
+              <%= label_tag "No" %>
+              <%= radio_button_tag "afford", false%>
+              <br/>
+
+              <%= label_tag "What behavior traits would absolutely NOT be acceptable to you and would cause you to return a pet?" %>
+              <%= text_area_tag "pet_traits", nil, class: "form-control" %>
+
+              <%= label_tag "Do you or others living with you have allergies?" %>
+              <br/>
+              <%= label_tag "Yes" %>
+              <%= radio_button_tag "allergies", true %>
+              <br/>
+              <%= label_tag "No" %>
+              <%= radio_button_tag "afford", false %>
+              <br/>
+
+              <%= label_tag "Provide the name of a veterinary reference." %>
+              <%= text_field_tag "reference", nil, class: "form-control" %>
+
+              <%= label_tag "Provide the address of your veterinary reference." %>
+              <%= text_field_tag "reference_addr", nil, class: "form-control" %>
+
+              <%= label_tag "Provide the phone number for your veterinary reference." %>
+              <%= text_field_tag "reference_phone", nil, class: "form-control" %>
+
+              <%= label_tag "List the name(s) of the pet(s) cared for at this vet's office." %>
+              <%= text_field_tag "reference_pet", nil, class: "form-control" %>
+
+              <%= label_tag "Provide the name of a personal reference." %>
+              <%= label_tag "First Name" %>
+              <%= text_field_tag "personal_ref_first_name", nil, class: "form-control" %>
+
+              <%= label_tag "Last Name" %>
+              <%= text_field_tag "personal_ref_last_name", nil, class: "form-control" %>
+
+              <%= label_tag "Provide a phone number for your personal reference." %>
+              <%= text_field_tag "personal_ref_phone", nil, class: "form-control" %>
+
+              <%= label_tag "What criteria are you looking for in your adopted pet?" %>
+              <%= text_area_tag "criteria", nil, class: "form-control" %>
+
+              <%= label_tag "Tell us a little bit about your past experience with dogs/puppies." %>
+              <%= text_area_tag "experience", nil, class: "form-control" %>
+
+              <div class="actions" style="margin-top: 5px;">
+                <%= submit_tag "Submit"%>
+              </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+

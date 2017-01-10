@@ -1,8 +1,9 @@
 class StaticPagesController < ApplicationController
   include ApplicationHelper
   require 'will_paginate/array'
+  before_action :set_sp
   before_action :set_static_page, only: [:show, :edit, :update, :destroy]
-  before_action :has_access_admin, except: [:home, :about_us, :woofs_for_help, :help, :contact_us]
+  before_action :has_access_admin, except: [:home, :about_us, :woofs_for_help, :foster, :donate, :adopt, :event, :special_event, :help, :contact_us]
 
   #Editable Pages
    
@@ -50,41 +51,61 @@ class StaticPagesController < ApplicationController
   end
 
   def contact_us
-    @help = StaticPage.first.contact_us
+    @contactus = StaticPage.first.contact_us
   end
 
+  def foster
+    @foster = StaticPage.first.foster
+  end
+
+  def donate
+    @donate = StaticPage.first.donate
+  end
 
   #Edit GET requests
   def edit_home 
-    @sp = StaticPage.first
     @spname = "Home"
   end
 
   def edit_about_us
-    @sp = StaticPage.first
     @spname = "About Us"
   end
 
   def edit_woofs_for_help
-    @sp = StaticPage.first
     @spname = "Woofs for Help"
   end
 
   def edit_help
-    @sp = StaticPage.first
     @spname = "Help"
   end
 
   def edit_contact_us
-    @sp = StaticPage.first
     @spname = "Contact Us"
   end
 
   def edit_sidebar
-    @sp = StaticPage.first
     @spname = "Sidebar"
   end
 
+  def edit_donate
+    @spname = "Donate"
+  end
+
+  def edit_event
+    @spname = "Event"
+  end
+
+  def edit_special_event
+    @spname = "Special Event"
+  end
+
+  def edit_foster
+    @spname = "Foster"
+  end
+
+  def edit_adopt
+    @spname = "Adopt"
+  end
 
   # GET /static_pages
   def index
@@ -154,11 +175,15 @@ class StaticPagesController < ApplicationController
     def set_static_page
       @static_page = StaticPage.find(params[:id])
     end
+    
+    def set_sp
+      @sp = StaticPage.first
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def static_page_params
       params.fetch(:static_page, {})
-      params.require(:static_page).permit(:about_us, :contact_us, :help, :sidebar, :home_block_one, :woofs_for_help)
+      params.require(:static_page).permit(:about_us, :contact_us, :help, :sidebar, :home_block_one, :woofs_for_help, :event, :special_event, :foster, :donate, :adopt)
     end
 
 

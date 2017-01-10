@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110083253) do
+ActiveRecord::Schema.define(version: 20170110154105) do
 
   create_table "blogs", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -63,6 +63,11 @@ ActiveRecord::Schema.define(version: 20170110083253) do
     t.string   "help"
     t.string   "home_block_one"
     t.string   "woofs_for_help"
+    t.string   "event"
+    t.string   "adopt"
+    t.string   "foster"
+    t.string   "donate"
+    t.string   "special_event"
   end
 
   create_table "users", force: :cascade do |t|

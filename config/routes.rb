@@ -16,9 +16,18 @@ Rails.application.routes.draw do
   get 'help/edit', :to => 'static_pages#edit_help'
   get 'contact_us', :to => 'static_pages#contact_us'
   get 'contact_us/edit', :to => 'static_pages#edit_contact_us'
+  get 'foster', to: 'static_pages#foster'
+  get 'foster/edit', to: 'static_pages#edit_foster'
+  get 'event/edit', to: 'static_pages#edit_event'
+  get 'special_event/edit', to: 'static_pages#edit_special_event'
+  get 'donate', to: 'static_pages#donate'
+  get 'donate/edit', to: 'static_pages#edit_donate'
+  get 'adopt/edit', to: 'static_pages#edit_adopt'
   get 'edit_sidebar', :to => 'static_pages#edit_sidebar'
   resources :events
   get 'special_events', :to => "events#special_events"
+  get 'adopt', :to => "forms#adopt"
+  post 'send_adoption', :to => "forms#send_adoption"
   resources :users
   get '/user/:id/user_management', to: 'users#hierarchy'
   post '/user/:id/user_management', to: 'users#set_hierarchy'

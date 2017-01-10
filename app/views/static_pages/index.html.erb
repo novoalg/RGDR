@@ -14,6 +14,41 @@
 </div>
 
 <div class="bs-callout bs-callout-primary">
+    <h4 class="card-title">Event:</h4>
+    <p class="card-text"><%= raw(@sp.event) %></p>
+    <%= link_to "Edit", event_edit_path, class: "btn btn-primary" %>
+
+</div>
+
+<div class="bs-callout bs-callout-primary">
+    <h4 class="card-title">Special Event:</h4>
+    <p class="card-text"><%= raw(@sp.special_event) %></p>
+    <%= link_to "Edit", special_event_edit_path, class: "btn btn-primary" %>
+
+</div>
+
+<div class="bs-callout bs-callout-primary">
+    <h4 class="card-title">Adopt:</h4>
+    <p class="card-text"><%= raw(@sp.adopt) %></p>
+    <%= link_to "Edit", adopt_edit_path, class: "btn btn-primary" %>
+
+</div>
+
+<div class="bs-callout bs-callout-primary">
+    <h4 class="card-title">Foster:</h4>
+    <p class="card-text"><%= raw(@sp.foster) %></p>
+    <%= link_to "Edit", foster_edit_path, class: "btn btn-primary" %>
+
+</div>
+
+<div class="bs-callout bs-callout-primary">
+    <h4 class="card-title">Donate:</h4>
+    <p class="card-text"><%= raw(@sp.donate) %></p>
+    <%= link_to "Edit", donate_edit_path, class: "btn btn-primary" %>
+
+</div>
+
+<div class="bs-callout bs-callout-primary">
     <h4 class="card-title">About Us:</h4>
     <p class="card-text"><%= raw(@sp.about_us) %></p>
     <%= link_to "Edit", about_us_edit_path, class: "btn btn-primary" %>

@@ -62,5 +62,10 @@ require 'faker'
         contact_us: Faker::Lorem.paragraph,
         help: Faker::Lorem.paragraph, 
         home_block_one: Faker::Lorem.paragraph, 
-        woofs_for_help: Faker::Lorem.paragraph
+        woofs_for_help: Faker::Lorem.paragraph,
+        event: Faker::Lorem.paragraph,
+        special_event: Faker::Lorem.paragraph,
+        adopt: Faker::Lorem.paragraph,
+        foster: Faker::Lorem.paragraph,
+        donate: Faker::Lorem.paragraph
     )

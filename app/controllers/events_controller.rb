@@ -7,10 +7,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    @event_block = StaticPage.first.event
     @events = Event.where(special: false).order(created_at: :asc)
   end
 
   def special_events
+    @event_block = StaticPage.first.special_event
     @events = Event.where(special: true).order(created_at: :asc)
   end
 

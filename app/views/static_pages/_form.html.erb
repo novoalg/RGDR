@@ -12,24 +12,28 @@
     </div>
   <% end %>
   <div class="col-lg-12">
+    <%= f.label @spname %>
     <% if @spname == "Home" %>
-        <%= f.label @spname %>
         <%= f.cktext_area :home_block_one, class: "form-control", ckeditor: {language: "us" } %>
-     
+    <% elsif @spname == "Event" %>
+        <%= f.cktext_area :event, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Special Event" %>
+        <%= f.cktext_area :special_event, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Adopt" %>
+        <%= f.cktext_area :adopt, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Foster" %>
+        <%= f.cktext_area :foster, class: "form-control", ckeditor: {language: "us" } %>
+    <% elsif @spname == "Donate" %>
+        <%= f.cktext_area :donate, class: "form-control", ckeditor: {language: "us" } %>
     <% elsif @spname == "Contact Us" %>
-        <%= f.label @spname %>
         <%= f.cktext_area :contact_us, class: "form-control", ckeditor: {language: "us" } %>
     <% elsif @spname == "About Us" %>
-        <%= f.label @spname %>
         <%= f.cktext_area :about_us, class: "form-control", ckeditor: {language: "us" } %>
     <% elsif @spname == "Woofs for Help" %>
-        <%= f.label @spname %>
         <%= f.cktext_area :woofs_for_help, class: "form-control", ckeditor: {language: "us" } %>
     <% elsif @spname == "Help" %>
-        <%= f.label @spname %>
         <%= f.cktext_area :help, class: "form-control", ckeditor: {language: "us" } %>
     <% elsif @spname == "Sidebar" %>
-        <%= f.label @spname %>
         <%= f.cktext_area :sidebar, class: "form-control", ckeditor: {language: "us" } %>
     <% end %>
      <div class="actions" style="margin-top: 5px;">
