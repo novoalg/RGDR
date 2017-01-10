@@ -55,16 +55,6 @@ class CommentsController < ApplicationController
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
-
-    logger.info "****************"
-    logger.info params.inspect
-    logger.info @comment.inspect
-    logger.info "****************"
-    logger.info "****************"
-    logger.info "****************"
-    logger.info "****************"
-    logger.info "****************"
-    logger.info "****************"
     respond_to do |format|
     @blog = @comment.blog
       if @comment.update(comment_params)

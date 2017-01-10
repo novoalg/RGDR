@@ -1,8 +1,7 @@
 class EventsController < ApplicationController
   include ApplicationHelper
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :has_access, only: [:show, :index]
-  before_action :has_access_admin, except: [:show, :index]
+  before_action :has_access_admin, only: [:edit, :new, :create, :update, :destroy]
 
   # GET /events
   # GET /events.json

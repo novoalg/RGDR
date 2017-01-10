@@ -112,28 +112,15 @@ class StaticPagesController < ApplicationController
     @sp = StaticPage.first
   end
 
-  # GET /static_pages/1
-  # GET /static_pages/1.json
-  def show
-  end
-
   # GET /static_pages/new
   def new
     @static_page = StaticPage.new
   end
 
-  # GET /static_pages/1/edit
-  def edit
-        #flash[:warning] = "This page cannot be edited or does not exist"
-        #redirect_to static_pages_path
-  end
-
-  
   # POST /static_pages
   # POST /static_pages.json
   def create
     @static_page = StaticPage.new(static_page_params)
-
     respond_to do |format|
       if @static_page.save
         format.html { redirect_to @static_page }

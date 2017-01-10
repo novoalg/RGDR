@@ -10,4 +10,13 @@ class StaticPage < ActiveRecord::Base
     validates :adopt, presence: true
     validates :foster, presence: true
     validates :donate, presence: true
+    before_create :one_sp_record
+
+    private
+        def one_sp_record
+            true
+            if StaticPage.all.count > 0
+                false
+            end
+        end
 end
