@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
+    after_create :confirmation_token
     has_many :blogs
 
-    attr_accessor :remember_token
+    attr_accessor :remember_token, :password_confirmation
     VALID_AGE_REGEX = /\A[0-9][0-9]?[0-9]?\Z/
     VALID_EMAIL_REGEX = /\A\w+\@\w+\.\w+\Z/ #remember to trim whitespace when validating
     VALID_ZIP_REGEX = /\A\d{5}(-\d{4})?\Z/
@@ -25,11 +26,23 @@ class User < ActiveRecord::Base
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
+    validates :password, confirmation: true
 
-    
     def remember
         self.remember_token = User.new_token
-        update_attribute(:remember_digest, User.digest(remember_token))
+        self.update_attribute(:remember_digest, User.digest(remember_token))
+    end
+
+    def confirm(user, token)
+        if !user.confirmed? && token == user.confirm_token
+            self.update_attribute(:confirm_token, nil)
+            self.update_attribute(:email_confirmed, true)
+            true
+        end
+    end
+
+    def confirmed?
+        return false if !email_confirmed
     end
 
     def authenticated?(remember_token)
@@ -65,5 +78,13 @@ class User < ActiveRecord::Base
             SecureRandom.urlsafe_base64
         end
     end
+
+    private
+        
+        def confirmation_token
+            if self.confirm_token.blank? && !self.email_confirmed
+                self.update_attribute(:confirm_token, SecureRandom.urlsafe_base64.to_s)
+            end
+        end
 
 end

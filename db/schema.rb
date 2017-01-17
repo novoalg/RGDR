@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110154105) do
+ActiveRecord::Schema.define(version: 20170116230701) do
 
   create_table "blogs", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 20170110154105) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "age"
@@ -86,6 +86,9 @@ ActiveRecord::Schema.define(version: 20170110154105) do
     t.string   "password_digest"
     t.integer  "hierarchy"
     t.string   "remember_digest"
+    t.boolean  "email_confirmed",  default: false
+    t.string   "confirm_token"
+    t.boolean  "subscribed",       default: false
   end
 
 end

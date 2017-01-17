@@ -105,14 +105,20 @@ class UsersController < ApplicationController
     p = p.tr(' ', '')
     @user.phone = p
     #0 = admin; 1 = moderator; 2 = member
+    #default: 2
     @user.hierarchy = 2
-
+    if user_params[:subscribed] && user_params[:subscribe] == 'true'
+        @user.subscribed = true
+    else
+        @user.subscribed = false
+    end
+    #user must confirm email before login in
+    @user.email_confirmed = 0
     respond_to do |format|
       if @user.save
-        log_in @user
-        flash[:success] = "User was successfully created."
-        format.html { redirect_to @user }
-        format.json { render :show, status: :created, location: @user }
+        UserMailer.welcome_email(@user).deliver
+        flash[:success] = "Your account was created successfully! Please confirm your email address to login."
+        format.html { redirect_to login_path }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -120,6 +126,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def confirm_email
+    logger.info "*****************************"
+    logger.info "IN CONFIRM_EMAIL"
+    logger.info params.inspect
+    logger.info "*****************************"
+  end
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update

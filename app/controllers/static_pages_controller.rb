@@ -20,8 +20,9 @@ class StaticPagesController < ApplicationController
     uri = URI(url)
     response = Net::HTTP.get(uri)
     @hash = Hash.from_xml(response) 
-    @pets = @hash["result"]["pets"]
+    @order= @hash["result"]["pets"]
     @details_hash = {}
+    @pets = @order.sort_by { |k| k["pet_name"] }
     @pets.each_with_index do |pet, i|
 #url format http://www.adoptapet.com/pet/PET_ID-PET_CITY-PET_STATE-PET_PRIMARY_BREED-MIX
 #MIX is included if it has a secondary breed

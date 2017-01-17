@@ -16,8 +16,7 @@ gem 'coffee-rails'
 gem 'city-state'
 
 #CSS
-gem 'bootstrap'
-
+gem 'bootstrap', '4.0.0.alpha6'
 #Pagination
 gem 'will_paginate', '>= 3.1'
 

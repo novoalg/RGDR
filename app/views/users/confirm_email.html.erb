@@ -1,11 +1,12 @@
 <div class="row">
-    <div class="col-lg-3">
-        <h2>Login</h2>
-        <%= form_for(:session, url: login_path) do |f| %>
+    <div class="col-lg-5">
+        <h2>Confirm Email</h2>
+        <%= form_for(:session, url: confirm_email_login_path) do |f| %>
             <%= f.label :email %>
             <%= f.email_field :email, class: "form-control" %>
             <%= f.label :password %>
             <%= f.password_field :password, class: "form-control" %>
+            <%= f.hidden_field "confirm_token", value: params[:confirm_token] %>
             <%= f.label :remember_me, class: "checkbox inline" do %>
             <%= f.check_box :remember_me %>
             <% end %>
@@ -13,8 +14,5 @@
             <br>
             <%= f.submit "Log in" %>
         <% end %>
-        <br>
-        <h6>New? <%= link_to "Sign up here!", new_user_path %></h6>
     </div>
-    <div class="col-lg-9"></div>
 </div>

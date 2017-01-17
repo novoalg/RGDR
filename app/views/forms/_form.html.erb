@@ -46,36 +46,56 @@ Your care in providing complete and accurate information is appreciated so that 
                   </ul>
                 </div>
               <% end %>
-              <%= label_tag "Name of dog or puppy you're interested in adopting." %>
-              <%= text_field_tag "dog_name", nil, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-7">
+                  <%= label_tag "Name of dog or puppy you're interested in adopting." %>
+                  <%= text_field_tag "dog_name", nil, class: "form-control" %>
+                </div>
+              </div>
 
-              <%= label_tag "Your first name" %>
-              <%= text_field_tag "first_name", nil, class: "form-control" %>
-              <%= label_tag "Your last name" %>
-              <%= text_field_tag "last_name", nil, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-3">
+                  <%= label_tag "Your first name" %>
+                  <%= text_field_tag "first_name", nil, class: "form-control" %>
+                  <%= label_tag "Your last name" %>
+                  <%= text_field_tag "last_name", nil, class: "form-control" %>
+                </div>
+              </div>
               
-              <%= label_tag "Your age" %>
-              <%= text_field_tag "age", nil, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-2">
+                  <%= label_tag "Your age" %>
+                  <%= text_field_tag "age", nil, class: "form-control" %>
+                </div>
+              </div>
 
-              <%= label_tag "Adress" %>
-              <%= label_tag "Street Address" %>
-              <%= text_field_tag "street_adress", nil, class: "form-control" %>
-              <%= label_tag "Street Adress Line Two" %>
-              <%= text_field_tag "street_adress_line_two", nil, class: "form-control" %>
-              <%= label_tag "City" %>
-              <%= text_field_tag "city", nil, class: "form-control" %>
-              <%= label_tag "State" %>
-              <%= text_field_tag "state", nil, class: "form-control" %>
-              <%= label_tag "ZIP" %>
-              <%= text_field_tag "zip", nil, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-6">
+                  <%= label_tag "Adress" %>
+                  <%= label_tag "Street Address" %>
+                  <%= text_field_tag "street_adress", nil, class: "form-control" %>
+                  <%= label_tag "Street Adress Line Two" %>
+                  <%= text_field_tag "street_adress_line_two", nil, class: "form-control" %>
+                  <%= label_tag "City" %>
+                  <%= text_field_tag "city", nil, class: "form-control" %>
+                  <%= label_tag "State" %>
+                  <%= text_field_tag "state", nil, class: "form-control" %>
+                  <%= label_tag "ZIP" %>
+                  <%= text_field_tag "zip", nil, class: "form-control" %>
+                </div>
+              </div>
 
-              <%= label_tag "Preferred Phone Number" %>
-              <%= text_field_tag "pref_phone_number", nil, class: "form-control" %>
-              <%= label_tag "Secondary Phone Number" %>
-              <%= text_field_tag "sec_phone_number", nil, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-6">
+                  <%= label_tag "Preferred Phone Number" %>
+                  <%= text_field_tag "pref_phone_number", nil, class: "form-control" %>
+                  <%= label_tag "Secondary Phone Number" %>
+                  <%= text_field_tag "sec_phone_number", nil, class: "form-control" %>
 
-              <%= label_tag "Email Address" %>
-              <%= email_field_tag "email", nil, class: "form-control" %>
+                  <%= label_tag "Email Address" %>
+                  <%= email_field_tag "email", nil, class: "form-control" %>
+                </div>
+              </div>
 
               <%= label_tag "What other pets do you have? " %>
               <%= text_area_tag "pets", nil, class: "form-control" %>
@@ -83,81 +103,104 @@ Your care in providing complete and accurate information is appreciated so that 
               <%= label_tag "What other people live in your household?" %>
               <%= text_area_tag "household", nil, class: "form-control" %>
 
-              <%= label_tag "Do you live in an apartment or house?" %>
-              <br/>
-              <%= label_tag "House" %>
-              <%= radio_button_tag "building", "house" %>
-              <br/>
-              <%= label_tag "Apartment" %>
-              <%= radio_button_tag "building", "apartment" %>
-              <br/>
-
-              <%= label_tag "Do you own or rent?" %>
-              <br/>
-              <%= label_tag "Own" %>
-              <%= radio_button_tag "payment", "own" %>
-              <br/>
-              <%= label_tag "Rent" %>
-              <%= radio_button_tag "payment", "rent" %>
-              <br/>
+              <div class="row adopt-form-radio"> 
+                <div class="col-lg-12">
+                  <%= label_tag "Do you live in an apartment or house?" %>
+                  <br/>
+                  <%= label_tag "House" %>
+                  <%= radio_button_tag "building", "house" %>
+                  <br/>
+                  <%= label_tag "Apartment" %>
+                  <%= radio_button_tag "building", "apartment" %>
+                  <br/>
+                </div>
+              </div>
+              <div class="row adopt-form-radio"> 
+                <div class="col-lg-12">
+                  <%= label_tag "Do you own or rent?" %>
+                  <br/>
+                  <%= label_tag "Own" %>
+                  <%= radio_button_tag "payment", "own" %>
+                  <br/>
+                  <%= label_tag "Rent" %>
+                  <%= radio_button_tag "payment", "rent" %>
+                  <br/>
+                </div>
+              </div>
 
               <%= label_tag "Describe where this pet will be kept during the day and at night." %>
               <%= text_area_tag "pet_sleep", nil, class: "form-control" %>
               
               <%= label_tag "During a normal day, how many hours will this pet be unattended(left alone)?" %>
-              <%= number_field_tag "unattended", nil, within: 0..24, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-2">
+                  <%= number_field_tag "unattended", nil, within: 0..24, class: "form-control" %>
+                </div>
+              </div>
 
-              <%= label_tag "Do you have a fenced yard?" %>
-              <br/>
-              <%= label_tag "Yes" %>
-              <%= radio_button_tag "fenced", true %>
-              <br/>
-              <%= label_tag "No" %>
-              <%= radio_button_tag "fenced", false%>
-              <br/>
+              <div class="row adopt-form-radio"> 
+                <div class="col-lg-12">
+                  <%= label_tag "Do you have a fenced yard?" %>
+                  <br/>
+                  <%= label_tag "Yes" %>
+                  <%= radio_button_tag "fenced", true %>
+                  <br/>
+                  <%= label_tag "No" %>
+                  <%= radio_button_tag "fenced", false%>
+                  <br/>
+                </div>
+              </div>
 
-              <%= label_tag "Can you afford a pet?" %>
-              <br/>
-              <%= label_tag "Yes" %>
-              <%= radio_button_tag "afford", true %>
-              <br/>
-              <%= label_tag "No" %>
-              <%= radio_button_tag "afford", false%>
-              <br/>
+              <div class="row adopt-form-radio"> 
+                <div class="col-lg-12">
+                  <%= label_tag "Can you afford a pet?" %>
+                  <br/>
+                  <%= label_tag "Yes" %>
+                  <%= radio_button_tag "afford", true %>
+                  <br/>
+                  <%= label_tag "No" %>
+                  <%= radio_button_tag "afford", false%>
+                  <br/>
+                </div>
+              </div>
 
               <%= label_tag "What behavior traits would absolutely NOT be acceptable to you and would cause you to return a pet?" %>
               <%= text_area_tag "pet_traits", nil, class: "form-control" %>
 
-              <%= label_tag "Do you or others living with you have allergies?" %>
-              <br/>
-              <%= label_tag "Yes" %>
-              <%= radio_button_tag "allergies", true %>
-              <br/>
-              <%= label_tag "No" %>
-              <%= radio_button_tag "afford", false %>
-              <br/>
+              <div class="row adopt-form-radio"> 
+                <div class="col-lg-12">
+                  <%= label_tag "Do you or others living with you have allergies?" %>
+                  <br/>
+                  <%= label_tag "Yes" %>
+                  <%= radio_button_tag "allergies", true %>
+                  <br/>
+                  <%= label_tag "No" %>
+                  <%= radio_button_tag "afford", false %>
+                  <br/>
+                </div>
+              </div>
 
-              <%= label_tag "Provide the name of a veterinary reference." %>
-              <%= text_field_tag "reference", nil, class: "form-control" %>
+              <div class="row">
+                <div class="col-lg-7">
+                  <%= label_tag "Provide the name of a veterinary reference." %>
+                  <%= text_field_tag "reference", nil, class: "form-control" %>
 
-              <%= label_tag "Provide the address of your veterinary reference." %>
-              <%= text_field_tag "reference_addr", nil, class: "form-control" %>
+                  <%= label_tag "Provide the address of your veterinary reference." %>
+                  <%= text_field_tag "reference_addr", nil, class: "form-control" %>
 
-              <%= label_tag "Provide the phone number for your veterinary reference." %>
-              <%= text_field_tag "reference_phone", nil, class: "form-control" %>
+                  <%= label_tag "Provide the phone number for your veterinary reference." %>
+                  <%= text_field_tag "reference_phone", nil, class: "form-control" %>
 
-              <%= label_tag "List the name(s) of the pet(s) cared for at this vet's office." %>
-              <%= text_field_tag "reference_pet", nil, class: "form-control" %>
+                  <%= label_tag "List the name(s) of the pet(s) cared for at this vet's office." %>
+                  <%= text_field_tag "reference_pet", nil, class: "form-control" %>
 
-              <%= label_tag "Provide the name of a personal reference." %>
-              <%= label_tag "First Name" %>
-              <%= text_field_tag "personal_ref_first_name", nil, class: "form-control" %>
+                  <%= label_tag "Provide the name of a personal reference." %>
+                  <%= text_field_tag "personal_ref_name", nil, class: "form-control" %>
 
-              <%= label_tag "Last Name" %>
-              <%= text_field_tag "personal_ref_last_name", nil, class: "form-control" %>
-
-              <%= label_tag "Provide a phone number for your personal reference." %>
-              <%= text_field_tag "personal_ref_phone", nil, class: "form-control" %>
+                  <%= label_tag "Provide a phone number for your personal reference." %>
+                  <%= text_field_tag "personal_ref_phone", nil, class: "form-control" %>
+                </div>
+              </div>
 
               <%= label_tag "What criteria are you looking for in your adopted pet?" %>
               <%= text_area_tag "criteria", nil, class: "form-control" %>

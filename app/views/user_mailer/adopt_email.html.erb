@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Your form submission</h1>
+                <% @params.each do |k,v| %>
+                    <%= "#{k}: #{v}" %>
+                <% end %>
+            </div>
+        </div>
+    </body>
+</html>

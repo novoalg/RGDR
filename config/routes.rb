@@ -32,9 +32,11 @@ Rails.application.routes.draw do
   get '/user/:id/user_management', to: 'users#hierarchy'
   post '/user/:id/user_management', to: 'users#set_hierarchy'
   post '/users/set_state', to: 'users#set_state'
+  get 'confirm_email', to: 'users#confirm_email'
   resources :comments
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
+  post '/confirm_email_login', to: 'sessions#confirm_email_login'
   delete '/logout', to: 'sessions#destroy'
   root to: 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

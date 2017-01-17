@@ -30,7 +30,7 @@ a {
     color: white;
 }
 
-a:visited {
+.container a:visited {
     color: rgb(196, 203, 255);
 }
 
@@ -66,7 +66,7 @@ a:hover {
     opacity: 1;
 }
 
-.navbar-fixed-bottom {
+.navbar.fixed-bottom {
     background-color: #222222;
     opacity: 1;
     
@@ -169,7 +169,7 @@ span {
     padding: 20px;
     margin: 15px;
     display: table-cell;
-    width: 29%;
+    width: 25%;
 
 }
 
@@ -181,13 +181,12 @@ span {
 }
 
 .pet-container a:visited {
-    color: #FFAE00;
+    color: rgb(0, 168, 255) !important;
 }
 
-.pet-container a {
-    color: #FFAE00;
+.pet_name {
+    color: rgb(0, 168, 255) !important;
 }
-
 .banner {
     width: 100%;
     display: table-cell;
@@ -242,4 +241,23 @@ footer {
     font-size: 8pt;
     font-weight: bold;
     color: #DBDBDB;
+}
+
+.pet-margin {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.users-table {
+    color: black;
+}
+
+label.required:after {
+    color: red;
+    content: "*";
+}
+
+.adopt-form-radio {
+    border: 1px solid white;
+    margin: 20px;
 }

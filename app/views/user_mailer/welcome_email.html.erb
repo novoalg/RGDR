@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Welcome to Real Good Dog Rescue, <%= @user.full_name %></h1>
+                <h3>Before you can comment on blogs, you must confirm your email.</h3>
+                <h5>"Click on the link below to confirm your account:"</h5>
+                <%= link_to "Confirm Email", { controller: "users", action: "confirm_email", confirm_token: "#{@user.confirm_token}" } %>
+            </div>
+        </div>
+    </body>
+</html>

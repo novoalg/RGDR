@@ -1,50 +1,60 @@
+<% title "Registration - Real Good Dog Rescue" %>
 <div class="row">
+    <div class="col-lg-12">
         <%= form_for(@user) do |f| %>
-          <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+              <% if @user.errors.any? %>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="error_explanation">
+                          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-              <ul>
-              <% @user.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-              </ul>
-            </div>
+                          <ul>
+                          <% @user.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                          <% end %>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
           <% end %>
-        <div class="col-lg-5">
-              <%= f.label :first_name %>
-              <%= f.text_field :first_name, class: "form-control" %>
-              <%= f.label :last_name %>
-              <%= f.text_field :last_name, class: "form-control" %>
-              <%= f.label :email %>
-              <%= f.text_field :email , class: "form-control" %>
-              <%= f.label :age %>
-              <%= f.text_field :age, class: "form-control" %>
-              <%= f.label :phone%>
-              <%= f.text_field :phone, class: "form-control" %>
-              <%= f.label :password %>
-              <%= f.password_field :password, class: "form-control" %>
-              <%= f.label :password_confirmation %>
-              <%= f.password_field :password_confirmation, class: "form-control" %>
-              <div class="actions">
-                <%= f.submit %>
-              </div>
-        </div>
-        <div class="col-lg-5">
-              <%= f.label :adress_line_one %>
-              <%= f.text_field :address_line_one, class: "form-control" %>
-              <%= f.label :adress_line_two %>
-              <%= f.text_field :address_line_two, class: "form-control" %>
-              <%= f.label :state %>
-              <%= f.collection_select :state, @states, :to_s, :to_s, { include_blank: false } , {:class => "form-control", id: "states" } %>
-              <%= f.label :city %>
-              <%= f.collection_select :city, @cities, :to_s, :to_s, { include_blank: false }, { class: "form-control", id: "cities" } %>
-              <%= f.label :zip %>
-              <%= f.text_field :zip, class: "form-control" %>
-
-        </div>
+            <div class="row">
+                <div class="col-lg-6">
+                          <%= f.label :first_name, class: "required" %>
+                          <%= f.text_field :first_name, class: "form-control" %>
+                          <%= f.label :last_name, class: "required" %>
+                          <%= f.text_field :last_name, class: "form-control" %>
+                          <%= f.label :email, class: "required" %>
+                          <%= f.text_field :email , class: "form-control" %>
+                          <%= f.label :age, class: "required" %>
+                          <%= f.text_field :age, class: "form-control" %>
+                          <%= f.label :phone, class: "required" %>
+                          <%= f.text_field :phone, class: "form-control" %>
+                          <%= f.label :password, class: "required" %>
+                          <%= f.password_field :password, class: "form-control" %>
+                          <%= f.label :password_confirmation, class: "required" %>
+                          <%= f.password_field :password_confirmation, class: "form-control" %>
+                          <div class="actions" style="margin-top: 10px;">
+                            <%= f.submit %>
+                          </div>
+                </div>
+                <div class="col-lg-6">
+                          <%= f.label :adress_line_one, class: "required" %>
+                          <%= f.text_field :address_line_one, class: "form-control" %>
+                          <%= f.label :adress_line_two %>
+                          <%= f.text_field :address_line_two, class: "form-control" %>
+                          <%= f.label :state, class: "required" %>
+                          <%= f.collection_select :state, @states, :to_s, :to_s, { include_blank: false } , {:class => "form-control", id: "states" } %>
+                          <%= f.label :city, class: "required" %>
+                          <%= f.collection_select :city, @cities, :to_s, :to_s, { include_blank: false }, { class: "form-control", id: "cities" } %>
+                          <%= f.label :zip, class: "required" %>
+                          <%= f.text_field :zip, class: "form-control" %>
+                          <%= f.label "Subscribe to News letter" %>
+                          <%= f.check_box :subscribed, {}, true, false %>
+                </div>
+            </div>
         <% end %>
-        <div class="col-lg-2"></div>
+    </div>
+</div>
         <script>
             $(document).ready(function() {
                 function change_select(data){
@@ -64,4 +74,3 @@
                 });
             });
         </script>
-</div>
