@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    </head>
+    <body>
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Hello <%= @user.full_name %>,</h1>
+                <h5>Real Good Dog Rescue has posted under its news!</h5>
+                <%= render @blog %>
+                <%= link_to "For more information click here.", @blog %>
+            </div>
+        </div>
+    </body>
+</html>

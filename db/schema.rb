@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116230701) do
+ActiveRecord::Schema.define(version: 20170117171917) do
 
   create_table "blogs", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170116230701) do
     t.boolean  "email_confirmed",  default: false
     t.string   "confirm_token"
     t.boolean  "subscribed",       default: false
+    t.boolean  "banned",           default: false
   end
 
 end

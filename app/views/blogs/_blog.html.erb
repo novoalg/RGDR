@@ -1,13 +1,13 @@
 <div class="bs-callout bs-callout-primary">
     <% if current_user && current_user.admin? %>
-        <%= link_to "Edit Blog", edit_blog_path(blog) %>
+        <%= link_to "Edit Article", edit_news_path(blog) %>
     <% end %>
-    <h1 align="center"><%= link_to blog.title, blog %></h1><span id="blog-date"><%= blog.localtime %></span>
+    <h1 align="center"><%= link_to blog.title, new_path(blog)%></h1><span id="blog-date"><%= blog.localtime %></span>
     <div class="blog-content">
         <%= raw(blog.content) %>
     </div>
     <span id="blog-date"><%= blog.updated_time %></span>
     <br/>
-    <span id="full-comments"><%= link_to "comments(#{blog.comments.count})", blog %></span>
+    <span id="full-comments"><%= link_to "comments(#{blog.comments.count})", new_path(blog) %></span>
 
 </div>

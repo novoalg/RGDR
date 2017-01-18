@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include SessionsHelper
   include ApplicationHelper
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :ban]
   before_action :set_user_state, only: [:edit, :update] 
   before_action :same_user, only: [:edit, :show, :update]
   before_action :no_admin_prevention, only: [:hierarchy, :set_hierarchy]
@@ -114,6 +114,7 @@ class UsersController < ApplicationController
     end
     #user must confirm email before login in
     @user.email_confirmed = 0
+    @user.banned = 0
     respond_to do |format|
       if @user.save
         UserMailer.welcome_email(@user).deliver
@@ -126,12 +127,19 @@ class UsersController < ApplicationController
     end
   end
 
-  def confirm_email
-    logger.info "*****************************"
-    logger.info "IN CONFIRM_EMAIL"
-    logger.info params.inspect
-    logger.info "*****************************"
+  def ban
+    if @user.banned
+        @user.update_attribute(:banned, false)
+        flash[:warning] = "#{@user.full_name} has been unbanned."
+    else
+        @user.update_attribute(:banned, true)
+        flash[:warning] = "#{@user.full_name} has been banned."
+    end
   end
+
+  def confirm_email
+  end
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
@@ -198,6 +206,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       #params.fetch(:user, {})
-      params.require(:user).permit(:first_name, :last_name, :age, :email, :address_line_one, :address_line_two, :city, :password, :password_confirmation, :state, :zip, :phone)
+      params.require(:user).permit(:first_name, :last_name, :age, :email, :address_line_one, :address_line_two, :city, :password, :password_confirmation, :banned, :state, :zip, :phone)
     end
 end

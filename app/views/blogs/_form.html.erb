@@ -2,7 +2,7 @@
 <%= form_for(@blog) do |f| %>
     <div class="bs-callout bs-callout-warning">
         <h4>Warning:</h4>
-        Make sure to select if the blog is active or not. If the blog is active it will show on the website, otherwise you can deactivate it.
+        Make sure to select if the article is active or not. If the article is active it will show on the website and an email will be sent to all subscribed users once created, otherwise you can set it to not active.
     </div>
     <div class="col-lg-6">
         <% if @blog.errors.any? %>
@@ -20,9 +20,9 @@
         <%= f.label "Active" %>
         <br/>
         <%= f.label "Yes" %>
-        <%= f.radio_button :active, true %>
+        <%= f.radio_button :active, "true" %>
         <%= f.label "No" %>
-        <%= f.radio_button :active, false%>
+        <%= f.radio_button :active, "false" %>
     </div>
     <div class="col-lg-6"></div>
     <div class="row">
@@ -30,7 +30,7 @@
             <%= f.label "Content" %>
             <%= f.cktext_area :content, class: "form-control", ckeditor: {language: "us" } %>
             <div class="actions" style="margin-top: 5px;">
-                <%= f.submit %>
+                <%= f.submit "Submit" %>
             </div>
         </div>
     </div>

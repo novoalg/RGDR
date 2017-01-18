@@ -25,18 +25,21 @@ class StaticPagesController < ApplicationController
     @pets = @order.sort_by { |k| k["pet_name"] }
     @pets.each_with_index do |pet, i|
 #url format http://www.adoptapet.com/pet/PET_ID-PET_CITY-PET_STATE-PET_PRIMARY_BREED-MIX
+#apparently only the ID makes the URL work. so we're just gonna do that
 #MIX is included if it has a secondary breed
 #state has to be uppercase converted to symbol to look for full state name using CS gem
-        state = pet["addr_state_code"].parameterize.upcase.to_sym
-        breed = pet["primary_breed"]
+        #state = pet["addr_state_code"].parameterize.upcase.to_sym
+        #breed = pet["primary_breed"]
 #make breed lower case
-        trimmed_breed = breed.downcase.gsub(/^[^a-z0-9\s]/i, '')
-        trimmed_breed = trimmed_breed.tr(' ', '-')
-        @pet_url = "http://www.adoptapet.com/pet/"+pet["pet_id"]+"-"+pet["addr_city"].downcase+"-"+CS.states(:us)[state].downcase+"-"+trimmed_breed
-        @pet_url += "-mix"
+        #trimmed_breed = breed.downcase.gsub(/^[^a-z0-9\s]/i, '')
+        #trimmed_breed = trimmed_breed.tr(' ', '-')
+        #@pet_url = "http://www.adoptapet.com/pet/"+pet["pet_id"]+"-"+pet["addr_city"].downcase+"-"+CS.states(:us)[state].downcase+"-"+trimmed_breed
+        #@pet_url += "-mix"
+
+
+        @pet_url = "http://www.adoptapet.com/pet/"+pet["pet_id"]
         @details_hash["#{i}"] = @pet_url
     end
-    #@pets = @pets.search(params[:pets], params[:page]) 
   end
 
   def about_us

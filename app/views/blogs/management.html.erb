@@ -1,14 +1,14 @@
-<% title "Blog Management - Real Good Dog Rescue " %>
-<h3 align="center">Create a new blog <%= link_to "here", new_blog_path %></h3>
-<h1 align="center">Active Blogs</h1>
+<% title "Article Management - Real Good Dog Rescue " %>
+<h3 align="center">Create a new article <%= link_to "here", new_news_path %></h3>
+<h1 align="center">Active Articles</h1>
 <% if @blogs.any? %>
     <% @blogs.each do |blog| %>
         <div class="bs-callout bs-callout-success">
-            <%= link_to "Edit Blog", edit_blog_path(blog) %>
-            <h4>Title: <%= blog.title %></h4>
+            <%= link_to "Edit Article", edit_news_path(blog) %>
+            <h4><%= link_to "#{blog.title}", new_path(blog) %></h4>
             <h5>Created by: <%= blog.user.full_name %></h5>
             <%= raw(blog.content) %>
-            <%= form_for blog, url: "blogs/#{blog.id}/toggle", method: :post do |f| %>
+            <%= form_for blog, url: "news/#{blog.id}/toggle", method: :post do |f| %>
                 <%= f.submit "Deactivate" %>
             <% end %>
         </div>
@@ -19,15 +19,15 @@
     </div>
 <% end %>
 
-<h1 align="center">Inactive Blogs</h1>
+<h1 align="center">Inactive Articles</h1>
 <% if @inactive_blogs.any? %>
     <% @inactive_blogs.each do |blog| %>
         <div class="bs-callout bs-callout-danger">
-            <%= link_to "Edit Blog", edit_blog_path(blog) %>
-            <h4>Title: <%= blog.title %></h4>
+            <%= link_to "Edit Article", edit_news_path(blog) %>
+            <h4><%= link_to "#{blog.title}", new_path(blog) %></h4>
             <h5>Created by: <%= blog.user.full_name %></h5>
             <%= raw(blog.content) %>
-            <%= form_for blog, url: "blogs/#{blog.id}/toggle", method: :post do |f| %>
+            <%= form_for blog, url: "news/#{blog.id}/toggle", method: :post do |f| %>
                 <%= f.submit "Activate" %>
             <% end %>
         </div>

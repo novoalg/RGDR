@@ -30,8 +30,12 @@
                 <td><%= user.email %></td>
                 <td><%= user.phone %></td>
                 <td><%= link_to 'Profile', user %></td>
-                <td><%= link_to 'Edit', edit_user_path(user) %></td>
-                <td><%= link_to 'Edit Hierarchy', "user/#{user.id}/user_management" %></td>
+                <td><%= link_to 'Permissions', "user/#{user.id}/user_management" %></td>
+                <% if user.banned %>
+                    <td><%= link_to 'Unban User', "user/#{user.id}/ban" %></td>
+                <% else %>
+                    <td><%= link_to 'Ban User', "user/#{user.id}/ban" %></td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
@@ -45,7 +49,7 @@ $(document).ready(function() {
         $("#users_table_filter").css("color", "white");
         $("#users_table_paginate").css("color", "white");
         $("thead").css("background-color", "white");
-        $("tr:odd").css("background-color", "white");
-        $("tr:odd").css("color", "black");
+        $("tr:odd").css("background-color", "#95A4E6");
+        $("tr").css("color", "black");
 } );
 </script>

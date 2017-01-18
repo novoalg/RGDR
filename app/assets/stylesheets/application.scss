@@ -29,12 +29,12 @@ a {
     font-family: 'QuicksandOTF';
     color: white;
 }
-
+//main page container links
 .container a:visited {
     color: rgb(196, 203, 255);
 }
 
-a:hover {
+.container a:visited:hover, a:hover {
     color: #FFAE00;
 }
 
@@ -42,6 +42,7 @@ a:hover {
     user-drag: none;
 }
 
+//BG
 #background {
     background: #FFF8EB;
     //background: url(/assets/stock_dog.jpg) no-repeat top right;
@@ -53,6 +54,8 @@ a:hover {
     //-o-background-size: cover;
     //-webkit-background-size: cover;
 }
+
+//top & bottom navbar
 .nav > li > a:hover, .nav > li > a:focus { 
     color: rgb(0, 0, 0);
     //color: black;
@@ -80,6 +83,7 @@ a:hover {
     color: black;
 }
 
+//links
 a:hover {
     background-color: transparent;
 }
@@ -90,11 +94,14 @@ a.navbar-brand:hover, a.navbar-brand:focus {
     //color: #000000;
 }
 
+//padding on the columns
+
 .nopadding {
     padding: 0;
     margin: 0;
 }
 
+//Main page
 .content {
     background-color: #123456;
     opacity: 0.9;
@@ -128,65 +135,8 @@ span {
     vertical-align: middle;
 }
 
-#blog-date {
-    font-size: 8pt;
-    font-color: #DBDBDB;
-}
+//banner 
 
-.blog-content {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-.comment {
-   padding: 10px;
-   margin: 15px 0;
-   margin-left: 20px;
-   margin-right: 20px;
-   color: black;
-   //width: 80%;
-   border: 1px solid #B5B4B4;
-   border-radius: 3px;
-   border-left-width: 5px;
-   background-color: #EBEBEB;
-}
-
-.comment-user {
-    color: #2C1FA3;
-    font-weight: bold;
-    font-size: 8pt;
-}
-
-.comment-footer {
-    font-size: 8pt;
-}
-
-.pet-container {
-    border: 2px solid rgb(176, 176, 176);
-    border-radius: 3px;
-    background-color: #FFFFFF;
-    color: black;
-    padding: 20px;
-    margin: 15px;
-    display: table-cell;
-    width: 25%;
-
-}
-
-.pet-container p {
-    font-size: 12pt;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    margin: 0;
-}
-
-.pet-container a:visited {
-    color: rgb(0, 168, 255) !important;
-}
-
-.pet_name {
-    color: rgb(0, 168, 255) !important;
-}
 .banner {
     width: 100%;
     display: table-cell;
@@ -216,6 +166,7 @@ h2.banner-h2 {
     src:url('/assets/Quicksand-Regular.otf');
 }
 
+//footer
 footer {
     display: block;
     width: 100%;
@@ -227,6 +178,7 @@ footer {
     bottom: 0 !important;
     margin: 0 !important;
 }
+
 #error_explanation {
   width: 450px;
   border: 2px solid red;
@@ -237,27 +189,117 @@ footer {
   color: black;
 }
 
+//Blogs
+
+#blog-date {
+    font-size: 8pt;
+    font-color: #DBDBDB;
+}
+
+.blog-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+////Comments
+
+.comment {
+   padding: 10px;
+   margin: 15px 0;
+   margin-left: 20px;
+   margin-right: 20px;
+   color: black;
+   //width: 80%;
+   border: 1px solid #B5B4B4;
+   border-radius: 3px;
+   border-left-width: 5px;
+   background-color: #EBEBEB;
+}
+
 #full-comments {
     font-size: 8pt;
     font-weight: bold;
     color: #DBDBDB;
 }
 
+.comment-user {
+    color: #2C1FA3;
+    font-weight: bold;
+    font-size: 8pt;
+}
+
+.comment-footer {
+    font-size: 8pt;
+}
+
+// pets
+
+
+.pet-container {
+    border: 2px solid rgb(176, 176, 176);
+    border-radius: 3px;
+    background-color: #FFFFFF;
+    color: black;
+    padding: 20px;
+    margin: 15px;
+    display: table-cell;
+    width: 25%;
+
+}
+
+.pet-container p {
+    font-size: 12pt;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    margin: 0;
+}
+
+.pet-container a:visited {
+    color: rgb(0, 168, 255) !important;
+}
+
+.pet_name {
+    color: rgb(0, 168, 255) !important;
+}
+
+
+
 .pet-margin {
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-.users-table {
+//user management
+
+#users_table a, a:visited{
     color: black;
 }
 
+#users_table a:hover, a:visited:hover {
+    color: #FFAE00;
+}
+
+
+//form requirements
 label.required:after {
     color: red;
     content: "*";
 }
 
+//adopt forms
+
 .adopt-form-radio {
     border: 1px solid white;
     margin: 20px;
+}
+
+
+//cards
+
+.card { 
+    background-color: #272727;
+}
+
+.card-header {
+  background-color: black;
 }

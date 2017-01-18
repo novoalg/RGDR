@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
     validates :phone, presence: true, format: { with: VALID_PHONE_REGEX }
     validates :phone, length: { is: 10 }
     validates :hierarchy, presence: true, numericality: { :less_than_or_equal_to => 2, :greater_than => -1 }
+    validates :banned, inclusion: { in: [true, false] }
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }

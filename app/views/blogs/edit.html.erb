@@ -1,6 +1,7 @@
-<h1>Editing Blog</h1>
+<% title "Editing #{@blog.title} - Real Good Dog Rescue" %>
+<h1>Editing Article</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @blog %> |
-<%= link_to 'Blogs', blogs_path %>
+<%= link_to 'Show', new_path(@blog) %> |
+<%= link_to 'News', news_path %>

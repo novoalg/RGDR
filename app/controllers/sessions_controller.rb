@@ -39,12 +39,13 @@ class SessionsController < ApplicationController
                 flash[:success] = "Your email has been confirmed #{user.full_name}."
                 log_in user
                 params[:session][:remember_me] ? remember(user) : forget(user)
-                format.html { redirect_to root_path }
+                redirect_to root_path
             end
         else
             logger.info "IN ERROR CONFIRM EMAIL LOGIN"
-            flash.now[:error] = "Invalid email and password combination"
-            format.json { render '/users/confirm_email', confirm_token: params[:confirm_token] }
+            redirect_to controller: "users", action: "confirm_email", confirm_token: params[:session][:confirm_token]
+            flash[:error] = "Invalid email and password combination"
+#'/users/confirm_email', confirm_token: params[:confirm_token]
         end
 
       end

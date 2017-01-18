@@ -2,9 +2,16 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   get 'sessions/new'
 
+#lisa wanted to change happy tails to news so now blogs path are renamed to news. it's a dam mess
   resources :blogs
-  get '/blogs_management', to: "blogs#management"
-  post 'blogs/:id/toggle', to: "blogs#toggle_active"
+  get '/news', to: "blogs#index"
+  get '/news/:id', to: "blogs#show", as: "new"
+  get '/new_news', to: "blogs#new"
+  get '/news/:id/edit', to: "blogs#edit", as: "edit_news"
+  put '/news/:id/update', to: "blogs#update"
+  get '/news_management', to: "blogs#management"
+  post '/news/:id/toggle', to: "blogs#toggle_active"
+#static pages
   resources :static_pages, :only => [:index, :edit, :create, :update]
   get 'home', :to => 'static_pages#home'
   get 'home/edit', :to => 'static_pages#edit_home'
@@ -24,20 +31,27 @@ Rails.application.routes.draw do
   get 'donate/edit', to: 'static_pages#edit_donate'
   get 'adopt/edit', to: 'static_pages#edit_adopt'
   get 'edit_sidebar', :to => 'static_pages#edit_sidebar'
+#events
   resources :events
   get 'special_events', :to => "events#special_events"
+#adoption form
   get 'adopt', :to => "forms#adopt"
   post 'send_adoption', :to => "forms#send_adoption"
+#users
   resources :users
   get '/user/:id/user_management', to: 'users#hierarchy'
   post '/user/:id/user_management', to: 'users#set_hierarchy'
   post '/users/set_state', to: 'users#set_state'
   get 'confirm_email', to: 'users#confirm_email'
+  post '/user/:id/ban', to: 'users#ban'
+#comments
   resources :comments
+#sessions
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   post '/confirm_email_login', to: 'sessions#confirm_email_login'
   delete '/logout', to: 'sessions#destroy'
+#root path
   root to: 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

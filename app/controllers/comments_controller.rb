@@ -3,17 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :has_access, only: [:new, :edit, :update, :create, :destroy]
   before_action :same_user, only: [:edit, :update, :destroy ]
-
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-  end
-
-  # GET /comments/1
-  # GET /comments/1.json
-  def show
-  end
+  before_action :banned_user, only: [:new, :create, :update, :destroy]
 
   # GET /comments/new
   def new
@@ -70,6 +60,8 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    comment = Comment.find_by_id(params[:id])
+    comment.update_attribute(content: "[deleted]")
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }

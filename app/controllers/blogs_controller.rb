@@ -1,30 +1,21 @@
 class BlogsController < ApplicationController
   include ApplicationHelper
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
-  before_action :has_access_admin, except: [:show, :index]
+#Moderators should have acces to blog functionality
+  before_action :has_access_moderator, except: [:show, :index]
   before_action :inactive_blog_visibility, only: [:show]
+#Lisa wanted to change the name from blog to news so it's all messed up now
 
   # GET /blogs
   # GET /blogs.json
   def index
     @blogs = Blog.where(active: true).order(created_at: :desc)
-    logger.info "*********************************"
-    logger.info @blogs.inspect
-    logger.info "*********************************"
   end
 
   # GET /blogs/1
   # GET /blogs/1.json
   def show
     @comments = @blog.comments.order(created_at: :desc)
-    logger.info "**************************"
-    logger.info "COMMENTS"
-    logger.info @comments.inspect
-    logger.info @comments.inspect
-    logger.info @comments.empty?
-    logger.info @comments.any?
-    logger.info @comments.blank?
-    logger.info "**************************"
     @new_comment = @blog.comments.new(blog_id: @blog.id)
   end
 
@@ -35,7 +26,6 @@ class BlogsController < ApplicationController
 
   # GET /blogs/1/edit
   def edit
-
   end
 
   def toggle_active
@@ -46,8 +36,8 @@ class BlogsController < ApplicationController
         @blog.update_attribute(:active, true)
     end
     #cheeky one line if statement
-    flash[:info] = "Blog as been #{(@blog.active) ? "activated" : "deactivated"}"
-    redirect_to blogs_management_path
+    flash[:info] = "Article as been #{(@blog.active) ? "activated" : "deactivated"}."
+    redirect_to news_management_path
   end
 
   def management
@@ -60,10 +50,19 @@ class BlogsController < ApplicationController
   def create
     #create blog based on current user logged in
     @blog = current_user.blogs.new(blog_params)
-    @blog.active = 1
+    if params[:blog][:active] && params[:blog][:active] == 'true'
+        @blog.active = true
+    else
+        @blog.active = false
+    end
     respond_to do |format|
       if @blog.save
-        flash[:success] = "Blog was created successfully."
+        flash[:success] = "Article was created successfully."
+# send email after article posted ONLY IF ACTIVE
+        if @blog.active
+            users = User.where(subscribed: true)
+            UserMailer.news_email(users, @blog).deliver
+        end
         format.html { redirect_to @blog }
         format.json { render :show, status: :created, location: @blog }
       else
@@ -78,8 +77,8 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        flash[:success] = "Blog updated successfully."
-        format.html { redirect_to @blog } 
+        flash[:success] = "Article updated successfully."
+        format.html { redirect_to new_path(@blog) } 
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit }
@@ -92,7 +91,7 @@ class BlogsController < ApplicationController
   # DELETE /blogs/1.json
   def destroy
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
+      format.html { redirect_to blogs_url }
       format.json { head :no_content }
     end
   end

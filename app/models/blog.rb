@@ -4,7 +4,7 @@ class Blog < ActiveRecord::Base
 
     validates :content, presence: true
     validates :title, presence: true
-    validates :active, presence: true
+    validates :active, inclusion: { in: [true, false] }
     validates :user_id, presence: true
 
     def localtime

@@ -74,11 +74,19 @@ module ApplicationHelper
     def has_access_moderator
         true
         if current_user.nil?
-            flash[:error] = "You do not have permission to do that. Please log in"
+            flash[:error] = "You do not have permission to do that. Please log in."
             redirect_to login_path
         elsif current_user.hierarchy > 1
             flash[:error] = "You do not have permission to do that."
             redirect_to root_path
+        end
+    end
+
+    def banned_user
+        true
+        if current_user.banned
+            flash[:error] = "You do not have permission to comment on news articles."
+            redirect_to blogs_path
         end
     end
 end
