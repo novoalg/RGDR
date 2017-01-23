@@ -7,7 +7,8 @@ class UserMailer < ApplicationMailer
     end 
 
     def adopt_email(form_params)
-       email = form_params[:email] 
+       email = form_params["email"] 
+       @params = form_params
        mail(to: email, subject: "Your adoption form has been submitted successfully.")
     end
 

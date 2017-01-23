@@ -6,9 +6,9 @@
     <body>
         <div class="row">
             <div class="col-lg-6">
-                <h1>Your form submission</h1>
+                <h1>Your form submission:</h1>
                 <% @params.each do |k,v| %>
-                    <%= "#{k}: #{v}" %>
+                    <b><%= "#{k.to_sym.to_s.capitalize.gsub("_", " ")}"%></b> <%= "#{v}" %>
                 <% end %>
             </div>
         </div>

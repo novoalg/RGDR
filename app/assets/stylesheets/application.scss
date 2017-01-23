@@ -279,6 +279,13 @@ footer {
     color: #FFAE00;
 }
 
+#banned_users_table a, a:visited{
+    color: black;
+}
+
+#banned_users_table a:hover, a:visited:hover {
+    color: #FFAE00;
+}
 
 //form requirements
 label.required:after {

@@ -1,5 +1,5 @@
 <% title "Happy Tails - Real Good Dog Rescue" %>
-<% if current_user && current_user.admin? %>
+<% if current_user && current_user.at_least_mod? %>
     <%= link_to "Create New Article", new_news_path %>
 <% end %>
 <% if @blogs.nil? %>

@@ -1,5 +1,5 @@
 <div class="bs-callout bs-callout-primary">
-    <% if current_user && current_user.admin? %>
+    <% if current_user && current_user.at_least_mod? %>
         <%= link_to "Edit Article", edit_news_path(blog) %>
     <% end %>
     <h1 align="center"><%= link_to blog.title, new_path(blog)%></h1><span id="blog-date"><%= blog.localtime %></span>

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :ban]
   before_action :set_user_state, only: [:edit, :update] 
   before_action :same_user, only: [:edit, :show, :update]
-  before_action :no_admin_prevention, only: [:hierarchy, :set_hierarchy]
+  before_action :no_admin_prevention, only: [:ban, :hierarchy, :set_hierarchy]
   before_action :has_access, only: [:edit, :show, :update]
   before_action :has_access_admin, only: [:hierarchy, :set_hierarchy, :destroy]
   before_action :has_access_moderator, only: [:index]
@@ -12,7 +12,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.where(banned: false).order(first_name: :desc, last_name: :desc)
+    @banned_users = User.where(banned: true).order(first_name: :desc, last_name: :desc)
   end
 
   # GET /users/1
@@ -54,32 +55,21 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
     case params[:user_h]
         when "admin"
-            logger.info "hierarchy = 0"
             hierarchy = 0
         when "moderator"
-            logger.info "hierarchy = 1"
             hierarchy = 1
         when "member"
-            logger.info "hierarchy = 2"
             hierarchy = 2
         else
-            flash[:error] = "Hiearchy format not allowed."
-            redirect_to "/user/#{@user.id}/user_management"
+            hiearchy = -1
     end
 
     if @user.update_attribute(:hierarchy, hierarchy)
         flash[:success] = "#{@user.full_name} power was set to: #{params[:user_h]}"
         redirect_to @user
     else
-        if @user.errors.empty?
-            flash[:info] = "User is already at this hierarchy"
-            redirect_to "/user/#{@user.id}/user_management"
-        else
-            respond_to do |format|
-                format.html { render :hierarchy }
-                format.json { render json: @user.errors, status: :unprocessable_entity }
-            end
-        end
+        flash[:error] = "You must select an option."
+        redirect_to "/user/#{@user.id}/user_management"
     end
     
   end
@@ -131,9 +121,11 @@ class UsersController < ApplicationController
     if @user.banned
         @user.update_attribute(:banned, false)
         flash[:warning] = "#{@user.full_name} has been unbanned."
+        redirect_to users_path
     else
         @user.update_attribute(:banned, true)
         flash[:warning] = "#{@user.full_name} has been banned."
+        redirect_to users_path
     end
   end
 
@@ -195,7 +187,7 @@ class UsersController < ApplicationController
     def no_admin_prevention
         if current_user
             if (current_user.id == params[:id].to_i)
-                flash[:info] = "You cannot change your own hierarchy."
+                flash[:info] = "You cannot do that."
                 redirect_to users_path
             else
                 true

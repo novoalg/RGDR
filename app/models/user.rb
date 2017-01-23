@@ -67,6 +67,19 @@ class User < ActiveRecord::Base
         self.hierarchy == 0
     end
 
+    def mod?
+        self.hierarchy == 1
+    end
+
+    def member?
+        self.hierarchy == 2
+    end
+
+    def at_least_mod?
+        self.hierarchy < 2
+    end
+
+
     class << self
 
         def digest(string)

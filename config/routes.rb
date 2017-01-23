@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   post '/user/:id/user_management', to: 'users#set_hierarchy'
   post '/users/set_state', to: 'users#set_state'
   get 'confirm_email', to: 'users#confirm_email'
-  post '/user/:id/ban', to: 'users#ban'
+  post '/user/:id/ban', to: 'users#ban', as: 'ban_user'
 #comments
   resources :comments
 #sessions
