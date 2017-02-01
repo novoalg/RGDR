@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     after_create :confirmation_token
     has_many :blogs
 
-    attr_accessor :remember_token, :password_confirmation
+    attr_accessor :remember_token, :password_confirmation, :reset_token
     VALID_AGE_REGEX = /\A[0-9][0-9]?[0-9]?\Z/
     VALID_EMAIL_REGEX = /\A\w+\@\w+\.\w+\Z/ #remember to trim whitespace when validating
     VALID_ZIP_REGEX = /\A\d{5}(-\d{4})?\Z/
@@ -51,6 +51,12 @@ class User < ActiveRecord::Base
         BCrypt::Password.new(remember_digest).is_password?(remember_token)
     end
 
+    def authenticated_reset?(token)
+        return false if reset_digest .nil?
+        BCrypt::Password.new(reset_digest).is_password?(token)
+    end
+
+
     def forget
         update_attribute(:remember_digest, nil)
     end
@@ -79,6 +85,15 @@ class User < ActiveRecord::Base
         self.hierarchy < 2
     end
 
+    def create_reset_digest
+        self.reset_token = User.new_token
+        update_attribute(:reset_digest, User.digest(reset_token))
+        update_attribute(:reset_sent_at, Time.zone.now)
+    end
+
+    def password_reset_expired?
+        self.reset_sent_at < 2.hours.ago
+    end
 
     class << self
 

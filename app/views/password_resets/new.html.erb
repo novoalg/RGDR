@@ -1,0 +1,12 @@
+<% title "Forgot Password - Real Good Dog Rescue" %>
+<div class="row"> 
+    <div class="col-lg-6">
+    <h1>Forgot Password</h1>
+        <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+            <%= f.label :email %>
+            <%= f.email_field :email, class: "form-control" %>
+            <br/>
+            <%= f.submit "Submit" %>
+        <% end %>   
+    </div>
+</div>

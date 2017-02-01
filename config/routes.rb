@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   mount Ckeditor::Engine => '/ckeditor'
   get 'sessions/new'
 
@@ -51,6 +55,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   post '/confirm_email_login', to: 'sessions#confirm_email_login'
   delete '/logout', to: 'sessions#destroy'
+#password-reset
+  resources :password_resets, only: [:new, :create, :edit, :update]
 #root path
   root to: 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.

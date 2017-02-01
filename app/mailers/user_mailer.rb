@@ -9,7 +9,12 @@ class UserMailer < ApplicationMailer
     def adopt_email(form_params)
        email = form_params["email"] 
        @params = form_params
-       mail(to: email, subject: "Your adoption form has been submitted successfully.")
+       mail(to: email, subject: "Your adoption form has been submitted successfully - Real Good Dog Rescue")
+    end
+
+    def password_reset(user)
+        @user = user
+        mail(to: @user.email, subject: "Password Reset - Real Good Dog Rescue")
     end
 
     def news_email(subbed_users, blog)
