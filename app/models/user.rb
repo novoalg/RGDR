@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     after_create :confirmation_token
     has_many :blogs
 
-    attr_accessor :remember_token, :password_confirmation, :reset_token
+    attr_accessor :remember_token, :password_confirmation, :current_password, :reset_token
     VALID_AGE_REGEX = /\A[0-9][0-9]?[0-9]?\Z/
     VALID_EMAIL_REGEX = /\A\w+\@\w+\.\w+\Z/ #remember to trim whitespace when validating
     VALID_ZIP_REGEX = /\A\d{5}(-\d{4})?\Z/

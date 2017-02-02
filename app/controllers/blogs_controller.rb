@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
 #Moderators should have acces to blog functionality
   before_action :has_access_moderator, except: [:show, :index]
   before_action :inactive_blog_visibility, only: [:show]
-#Lisa wanted to change the name from blog to news so it's all messed up now
+#Lisa wanted to change the name from blog to news so it's a mess with the naming convention
 
   # GET /blogs
   # GET /blogs.json

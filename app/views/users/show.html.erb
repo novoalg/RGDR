@@ -10,4 +10,4 @@
 <h5>State: <%=@user.state%></h5>
 <h5>ZIP: <%=@user.zip%></h5>
 <h5>Phone: <%=@user.format_phone%></h5>
-<%= link_to 'Edit', edit_user_path(@user) %>
+<%= link_to 'Edit', edit_user_path(@user) %> | <%= link_to "Change Password", edit_password_management_path %>
