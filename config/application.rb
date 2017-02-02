@@ -22,6 +22,7 @@ module RGDR
 
     # For Foundation 5
     config.assets.precompile += %w( vendor/modernizr )
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
     config.assets.enable = true
     #config.assets.path << File.join(Rails.root, 'app', 'assets', 'fonts')
