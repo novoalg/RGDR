@@ -4,9 +4,8 @@ require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-if defined?(Bundler)
-    # If you precompile assets before deploying to production, use this line
-    Bundler.require(*Rails.groups(:assets => %w(development test)))
+# If you precompile assets before deploying to production, use this line
+Bundler.require(*Rails.groups(:assets => %w(development test)))
     # If you want your assets lazily compiled in production, use this line
     #Bundler.require(:default, :assets, Rails.env)
 
@@ -25,10 +24,9 @@ module RGDR
     # config.i18n.default_locale = :de
 
     # For Foundation 5
-    config.assets.precompile += %w( vendor/modernizr *.png *.jpg *.jpeg *.gif)
     config.assets.initialize_on_precompile = false
+    config.assets.precompile += %w( vendor/modernizr *.png *.jpg *.jpeg *.gif)
     config.assets.enable = true
-    config.filter_parameters += [:password]
     #config.assets.path << File.join(Rails.root, 'app', 'assets', 'fonts')
 
 
