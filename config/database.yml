@@ -7,14 +7,14 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: localhost
-  username: rgdr
-  password: <%= ENV["RGDR_DB_PW"] %>
   pool: 5
   #timeout: 5000
 
 development:
   <<: *default
+  host: localhost
+  username: rgdr
+  password: "rgdrpassword1"
   database: db/development
 
 # Warning: The database defined as "test" will be erased and
@@ -23,6 +23,11 @@ development:
 test: &test
   <<: *default
   database: db/test
+  host: localhost
+  username: rgdr
+  password: "rgdrpassword1"
+  database: db/development
+
 
 production:
   <<: *default
