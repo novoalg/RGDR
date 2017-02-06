@@ -16,6 +16,10 @@ gem 'coffee-rails'
 #heroku 
 gem 'heroku'
 
+#puma for procfile
+
+gem 'puma'
+
 #States Gem
 gem 'city-state'
 
