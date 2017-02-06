@@ -20,6 +20,9 @@ require 'faker'
         phone: "1114440000", 
         password: "asdasd", 
         password_confirmation: "asdasd", 
+        banned: false, 
+        subscribed: true,
+        email_confirmed: true,
         hierarchy: 0
     )
 
@@ -36,6 +39,9 @@ require 'faker'
         phone: "1114240000", 
         password: "asdasd", 
         password_confirmation: "asdasd", 
+        banned: false, 
+        subscribed: true,
+        email_confirmed: true,
         hierarchy: 1
     )
 
@@ -52,6 +58,9 @@ require 'faker'
         phone: "1114640000", 
         password: "asdasd", 
         password_confirmation: "asdasd", 
+        banned: false, 
+        subscribed: true,
+        email_confirmed: true,
         hierarchy: 2
     )
  

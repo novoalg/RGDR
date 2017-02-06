@@ -12,8 +12,6 @@ class StaticPagesController < ApplicationController
     params.each do |k, v|
         puts "#{k} : #{v}"
     end
-    #logger.info "Rails env: #{Rails.env}"
-    #logger.info "*************"
     @homeblockone = StaticPage.first.home_block_one
 #parse XML
     url = "http://api.adoptapet.com/search/pets_at_shelter?key=56f8d6ec5a75c3a28c5893fad35d250f&shelter_id=82425"

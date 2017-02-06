@@ -140,6 +140,7 @@ class UsersController < ApplicationController
     digits_p = p.tr('()-', '') 
     trimmed_p = digits_p.tr(' ', '')
     params[:user][:phone] = trimmed_p
+    logger.info params.inspect
     respond_to do |format|
       if @user.authenticate(params[:user][:password]) && @user.update(user_params) 
         flash[:success] = "User updated successfully."
@@ -198,6 +199,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       #params.fetch(:user, {})
-      params.require(:user).permit(:first_name, :last_name, :age, :email, :address_line_one, :address_line_two, :city, :password, :password_confirmation, :banned, :state, :zip, :phone)
+      params.require(:user).permit(:first_name, :last_name, :age, :email, :address_line_one, :address_line_two, :city, :password, :password_confirmation, :banned, :state, :subscribed, :zip, :phone)
     end
 end

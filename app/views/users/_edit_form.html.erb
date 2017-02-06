@@ -46,6 +46,8 @@
                   <%= f.collection_select :city, @cities, :to_s, :to_s, { include_blank: false }, { class: "form-control", id: "cities" } %>
                   <%= f.label :zip %>
                   <%= f.text_field :zip, class: "form-control" %>
+                  <%= f.label "Subscribed from Newsfeed" %>
+                  <%= f.check_box :subscribed, checked_value: true, unchecked_value: false %>
 
             </div>
         </div>
