@@ -75,6 +75,11 @@ class BlogsController < ApplicationController
   # PATCH/PUT /blogs/1
   # PATCH/PUT /blogs/1.json
   def update
+    if params[:blog][:active] && params[:blog][:active] == 'true'
+        @blog.active = true
+    else
+        @blog.active = false
+    end
     respond_to do |format|
       if @blog.update(blog_params)
         flash[:success] = "Article updated successfully."
@@ -104,7 +109,7 @@ class BlogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-        params.require(:blog).permit(:title, :user_id, :content)
+        params.require(:blog).permit(:title, :user_id, :active, :content)
     end
 
     def inactive_blog_visibility

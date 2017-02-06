@@ -20,8 +20,10 @@ class UserMailer < ApplicationMailer
     def news_email(subbed_users, blog)
         @users = subbed_users
         @blog = blog
-        @users.each do |user|
-            mail(to: @user.email, subject: "Real Good Dog Rescue - #{blog.title}")
+        if @users.any?
+            @users.each do |user|
+                mail(to: @user.email, subject: "Real Good Dog Rescue - #{blog.title}")
+            end 
         end 
     end
 end
