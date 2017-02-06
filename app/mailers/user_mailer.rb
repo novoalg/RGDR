@@ -22,7 +22,8 @@ class UserMailer < ApplicationMailer
         @blog = blog
         if @users.any?
             @users.each do |user|
-                mail(to: @user.email, subject: "Real Good Dog Rescue - #{blog.title}")
+                @user = user
+                mail(to: user.email, subject: "Real Good Dog Rescue - #{blog.title}")
             end 
         end 
     end
