@@ -235,12 +235,12 @@ class FormsController < ApplicationController
             #redirect_to(adopt_path(:form_errors => @errors))
             format.html { render "adopt" } 
             format.json { render json: @errors, status: :unprocessable_entity }
-            logger.info "***********************"
-            logger.info "***********************"
-            logger.info params.inspect 
-            logger.info @errors.inspect
-            logger.info "***********************"
-            logger.info "***********************"
+            #logger.info "***********************"
+            #logger.info "***********************"
+            #logger.info params.inspect 
+            #logger.info @errors.inspect
+            #logger.info "***********************"
+            #logger.info "***********************"
         else
             UserMailer.adopt_email(@user).deliver
             flash[:success] = "Your form was submitted successfully. An email with information about your adoption status should be sent to you shortly."
