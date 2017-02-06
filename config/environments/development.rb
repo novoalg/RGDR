@@ -22,7 +22,7 @@ Rails.application.configure do
           :port => "587",
           :domain => "gmail.com",
           :user_name => "rgdrtemp@gmail.com",
-          :password => ENV["gmailpw"],
+          :password => ENV["GMAILPW"],
           :authentication => "login",
           :enable_starttls_auto => true
   }
