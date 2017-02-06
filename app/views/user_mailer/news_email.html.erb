@@ -8,7 +8,8 @@
             <div class="col-lg-6">
                 <h1>Hello <%= @user.full_name %>,</h1>
                 <h5>Real Good Dog Rescue has posted under its news!</h5>
-                <%= render @blog %>
+                <h1 align="center"><%= blog.title %><h1>
+                <%= raw(blog.content) %>
                 <%= link_to "For more information click here.", @blog %>
             </div>
         </div>
