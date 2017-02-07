@@ -281,7 +281,7 @@ class FormsController < ApplicationController
             format.json { render json: @errors, status: :unprocessable_entity }
         else
             UserMailer.adopt_email(@user).deliver
-            flash[:success] = "Your form was submitted successfully. An email with information about your adoption status should be sent to you shortly."
+            flash[:success] = "Your form was submitted successfully. An email with information about your adoption form will be sent to an administrator."
             format.html { redirect_to "/adopt" }
         end
     end
