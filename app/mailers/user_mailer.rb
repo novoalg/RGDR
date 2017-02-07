@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+    include ActionView::Helpers::UrlHelper
     default from: "rgdrtemp@gmail.com"
     require 'sendgrid-ruby'
     include SendGrid
