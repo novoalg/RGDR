@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_action :no_admin_prevention, only: [:ban, :hierarchy, :set_hierarchy]
   before_action :has_access, only: [:edit, :show, :update]
   before_action :has_access_admin, only: [:hierarchy, :set_hierarchy, :destroy]
-  before_action :has_access_moderator, only: [:index]
+  before_action :has_access_moderator, only: [:ban, :index]
 
   # GET /users
   # GET /users.json

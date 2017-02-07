@@ -8,6 +8,51 @@ class FormsController < ApplicationController
     logger.info "*************************"
   end
 
+  def contact
+    @errors = {}
+    @form = {}
+#first name
+    if /\A\w+\Z/.match(params["first_name"]) && params["first_name"].length < 15
+        @form["Your first name"] = params["first_name"]
+    else
+        @errors["First Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
+    end
+#last name
+    if /\A\w+\Z/.match(params["last_name"]) && params["last_name"].length < 15
+        @form["Your last name"] = params["last_name"]
+    else
+        @errors["Last Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
+    end
+
+    if /\A\(?\d{3}\)?\-?\d{3}\-?\d{4}\Z/.match(params["phone_number"]) 
+        @form["Phone Number"] = params["phone_number"]
+    else
+        @errors["Phone Number"] = "invalid format. Please use XXX-YYY-ZZZZ, (XXX)-YYYZZZZ, (XXX)-YYY-ZZZZ, or XXXYYYZZZZ."
+    end
+
+    if /\A\w+\@\w+\.\w+\Z/.match(params["email"])
+        @form["Email"] = params["email"]
+    else
+        @errors["Email"] = "cannot be blank and must follow email@emaildomain.domain format. Example: email@gmail.com"
+    end
+
+    if params["message"].length > 0 && params["message"].length < 400
+        @form["Your message"] = params["message"]
+    else
+        @errors["Your message"] = "cannot be blank and cannot have length longer than 400 characters."
+    end
+    respond_to do |format|
+        if @errors.any?
+            format.html { render "static_pages/contact_us" } 
+            format.json { render json: @errors, status: :unprocessable_entity }
+        else
+            UserMailer.contact_email(@form).deliver
+            flash[:success] = "Your form was submitted successfully. An administrator will contact you sonn."
+            format.html { redirect_to "/contact_us" }
+        end
+    end
+  end
+
   def send_adoption
     @user = {}
     @errors = {}

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'help/edit', :to => 'static_pages#edit_help'
   get 'contact_us', :to => 'static_pages#contact_us'
   get 'contact_us/edit', :to => 'static_pages#edit_contact_us'
+  post 'contact', to: 'forms#contact'
   get 'foster', to: 'static_pages#foster'
   get 'foster/edit', to: 'static_pages#edit_foster'
   get 'event/edit', to: 'static_pages#edit_event'
