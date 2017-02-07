@@ -46,7 +46,7 @@ class UserMailer < ApplicationMailer
            personalization.to = Email.new(email: email)
            @form = ""
            @params.each do |k, v|
-               @form << "#{k}: #{v} </br>"
+               @form << "#{k}: #{v} <br>"
            end
            personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params[1]} #{form_params[2]}")
            personalization.substitutions = Substitution.new(key: '-form-', value: @form)
@@ -94,15 +94,15 @@ class UserMailer < ApplicationMailer
     def contact_email(form)
         email = form["Email"]
         if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test'
-            mail(to: "rgdrtemp@gmail.com", subject: "#{form["First Name"]} #{form["Last Name"]} has contacted you- Real Good Dog Rescue")
+            mail(to: "rgdrtemp@gmail.com", subject: "#{form[0]} #{form[1]} has contacted you- Real Good Dog Rescue")
         else
             mail = Mail.new
             mail.from = Email.new(email: 'rgdrtemp@gmail.com')
-            mail.subject = "#{form['First Name']} #{form['Last Name']} has contacted you - Real Good Dog Rescue"
+            mail.subject = "#{form[0]} #{form[1]} has contacted you - Real Good Dog Rescue"
             personalization = Personalization.new
             personalization.to = Email.new(email: 'rgdrtemp@gmail.com') #change to lisa's email once it works
-            personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form["First Name"]} #{form["Last Name"]}")
-            personalization.substitutions = Substitution.new(key: '-fullnamesubject-', value: "#{form["First Name"]} #{form["Last Name"]}")
+            personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form[0]} #{form[1]}")
+            personalization.substitutions = Substitution.new(key: '-fullnamesubject-', value: "#{form[0]} #{form[1]}")
             @form = ""
             form.each do |k, v|
                 @form << "#{k}: #{v} <br>"
