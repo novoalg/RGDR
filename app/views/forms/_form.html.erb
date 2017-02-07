@@ -151,10 +151,10 @@ Your care in providing complete and accurate information is appreciated so that 
                   <%= label_tag "Do you have a fenced yard?", nil, class: "required" %>
                   <br/>
                   <%= label_tag "Yes" %>
-                  <%= radio_button_tag "fenced", true %>
+                  <%= radio_button_tag "fenced", "yes" %>
                   <br/>
                   <%= label_tag "No" %>
-                  <%= radio_button_tag "fenced", false%>
+                  <%= radio_button_tag "fenced", "no"%>
                   <br/>
                 </div>
               </div>
@@ -164,10 +164,10 @@ Your care in providing complete and accurate information is appreciated so that 
                   <%= label_tag "Can you afford a pet?", nil, class: "required" %>
                   <br/>
                   <%= label_tag "Yes" %>
-                  <%= radio_button_tag "afford", true %>
+                  <%= radio_button_tag "afford", "yes"%>
                   <br/>
                   <%= label_tag "No" %>
-                  <%= radio_button_tag "afford", false%>
+                  <%= radio_button_tag "afford", "no"%>
                   <br/>
                 </div>
               </div>
@@ -180,10 +180,10 @@ Your care in providing complete and accurate information is appreciated so that 
                   <%= label_tag "Do you or others living with you have allergies?" %>
                   <br/>
                   <%= label_tag "Yes" %>
-                  <%= radio_button_tag "allergies", true %>
+                  <%= radio_button_tag "allergies", "yes" %>
                   <br/>
                   <%= label_tag "No" %>
-                  <%= radio_button_tag "afford", false %>
+                  <%= radio_button_tag "allergies", "no" %>
                   <br/>
                 </div>
               </div>

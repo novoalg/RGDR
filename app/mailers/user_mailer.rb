@@ -46,9 +46,9 @@ class UserMailer < ApplicationMailer
            personalization.to = Email.new(email: email)
            @form = ""
            @params.each do |k, v|
-               @form << "#{k}: #{v} <br>"
+               @form << "<b>#{k}</b> <i>#{v}</i> <br>"
            end
-           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params[1]} #{form_params[2]}")
+           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params["Your first name"]} #{form_params["Your last name"]}")
            personalization.substitutions = Substitution.new(key: '-form-', value: @form)
            mail.template_id ="65bda34b-13ad-4adb-84a9-2d69b22babbb"
            mail.personalizations = personalization

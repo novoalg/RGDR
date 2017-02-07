@@ -59,20 +59,20 @@ class FormsController < ApplicationController
 #validations
 #dog name
     if /\A\w+\Z/.match(params["dog_name"]) && params["dog_name"].length < 15
-        @user["Name of dog or puppy you're interested in adopting"] = params["dog_name"]
+        @user["Name of dog or puppy you're interested in adopting"] = params["dog_name"].capitalize
     else
         @errors["Dog Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
 
     end
 #first name
     if /\A\w+\Z/.match(params["first_name"]) && params["first_name"].length < 15
-        @user["Your first name"] = params["first_name"]
+        @user["Your first name"] = params["first_name"].capitalize
     else
         @errors["First Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
     end
 #last name
     if /\A\w+\Z/.match(params["last_name"]) && params["last_name"].length < 15
-        @user["Your last name"] = params["last_name"]
+        @user["Your last name"] = params["last_name"].capitalize
     else
         @errors["Last Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
     end
@@ -96,13 +96,13 @@ class FormsController < ApplicationController
     end
 #city
     if /\A\w+\Z/.match(params["city"]) && params["city"].length < 50
-        @user["City"] = params["city"]
+        @user["City"] = params["city"].capitalize
     else
         @errors["City"] = "cannot be blank, and cannot have length longer than 50 characters."
     end
 #state
     if /\A\w+\Z/.match(params["state"]) && params["state"].length < 20
-        @user["State"] = params["state"]
+        @user["State"] = params["state"].capitalize
     else
         @errors["State"] = "cannot be blank, and cannot have length longer than 20 characters."
     end
@@ -128,7 +128,7 @@ class FormsController < ApplicationController
     end
 #email
     if /\A\w+\@\w+\.\w+\Z/.match(params["email"])
-        @user["Email"] = params["email"]
+        @user["Email"] = params["email"].downcase
     else
         @errors["Email"] = "cannot be blank and must follow email@emaildomain.domain format. Example: email@gmail.com"
     end
@@ -147,7 +147,7 @@ class FormsController < ApplicationController
 #apt or house
     if params["building"]
         if params["building"] == "house" || params["building"] == "apartment"
-            @user["Do you live in an apartment or house?"] = params["building"]
+            @user["Do you live in an apartment or house?"] = params["building"].capitalize
         else
             @errors["Live in an apartment or house"] = "invalid choice between house and apartment."
         end
@@ -158,7 +158,7 @@ class FormsController < ApplicationController
 #landlord name & phone number
     if params["payment"]
         if params["payment"] == "own" || params["payment"] == "rent"
-            @user["Do you own or rent?"] = params["payment"]
+            @user["Do you own or rent?"] = params["payment"].capitalize
             if params["payment"] == "rent"
                 if params["landlord_name"].length > 0 && params["landlord_name"].length < 50
                     @user["If you rent, provide your landord's name"] = params["landlord_name"]
@@ -191,8 +191,8 @@ class FormsController < ApplicationController
     end
 #fenced yard
     if params["fenced"] 
-        if params["fenced"] == "true" || params["fenced"] == "false"
-            @user["Do you have a fenced yard?"] = params["fenced"]
+        if params["fenced"] == "yes" || params["fenced"] == "no"
+            @user["Do you have a fenced yard?"] = params["fenced"].capitalize
         else
             @errors["Do you have a fenced yard?"] = "invalid option."
         end
@@ -201,8 +201,8 @@ class FormsController < ApplicationController
     end
 #afford a pet
     if params["afford"] 
-        if params["afford"] == "true" || params["afford"] == "false"
-            @user["Can you afford a pet?"] = params["afford"]
+        if params["afford"] == "yes" || params["afford"] == "no"
+            @user["Can you afford a pet?"] = params["afford"].capitalize
         else
             @errors["Can you afford a pet?"] = "invalid option."
         end
@@ -216,9 +216,9 @@ class FormsController < ApplicationController
         @errors["What behavior traits would absolutely NOT be acceptable to you and would cause you to return apet?"] = "cannot be blank and cannot have length longer than 500 characters."
     end
 #living with ppl with alergies
-    if params["allergies"] 
-        if params["allergies"] == "true" || params["allergies"] == "false"
-            @user["Do you or others living with you have allergies?"] = params["allergies"]
+    if params["allergies"]
+        if params["allergies"] == "yes" || params["allergies"] == "no"
+            @user["Do you or others living with you have allergies?"] = params["allergies"].capitalize
         else
             @errors["Do you or other living with you have allergies?"] = "invalid option."
         end
@@ -277,15 +277,8 @@ class FormsController < ApplicationController
 
     respond_to do |format|
         if @errors.any?
-            #redirect_to(adopt_path(:form_errors => @errors))
             format.html { render "adopt" } 
             format.json { render json: @errors, status: :unprocessable_entity }
-            #logger.info "***********************"
-            #logger.info "***********************"
-            #logger.info params.inspect 
-            #logger.info @errors.inspect
-            #logger.info "***********************"
-            #logger.info "***********************"
         else
             UserMailer.adopt_email(@user).deliver
             flash[:success] = "Your form was submitted successfully. An email with information about your adoption status should be sent to you shortly."
