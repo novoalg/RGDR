@@ -40,7 +40,8 @@ class UserMailer < ApplicationMailer
             mail(to: email, subject: "Your adoption form has been submitted successfully - Real Good Dog Rescue")
        else
            sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
-            #email to person who submitted form
+#don't email person who submitted form, in this case lisa will look over their information and email them back
+=begin
            mail = Mail.new
            mail.from = Email.new(email: 'rgdrtemp@gmail.com')
            mail.subject = 'Your adoption form has been submitted successfully - Real Good Dog Rescue'
@@ -62,11 +63,12 @@ class UserMailer < ApplicationMailer
            puts response.status_code
            puts response.body
            puts response.headers
+=end
 
             #email to lisa 
            mail = Mail.new
            mail.from = Email.new(email: 'rgdrtemp@gmail.com')
-           mail.subject = "#{form_params['Your first name']} #{form_params['Your last name']} has submitted an adoption form- Real Good Dog Rescue"
+           mail.subject = "#{form_params['Your first name']} #{form_params['Your last name']} has submitted an adoption form - Real Good Dog Rescue"
            personalization = Personalization.new
            personalization.to = Email.new(email: 'ltrenthem@gmail.com') 
            personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params['Your first name']} #{form_params['Your last name']}")
