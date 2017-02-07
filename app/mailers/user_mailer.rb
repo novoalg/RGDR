@@ -142,7 +142,7 @@ class UserMailer < ApplicationMailer
                     personalization = Personalization.new
                     personalization.to = Email.new(email: user.email)
                     personalization.substitutions = Substitution.new(key: '-title-', value: blog.title)
-                    personalization.substitutions = Substitution.new(key: '-content-', value: raw(blog.content))
+                    personalization.substitutions = Substitution.new(key: '-content-', value: blog.content)
                     personalization.substitutions = Substitution.new(key: '-bloglink-', value: "#{Rails.application.routes.url_helpers.url_for(controller: 'blogs', action: 'show', id: blog.id, host: "realgooddogrescue.heroku.com")}")
                     personalization.substitutions = Substitution.new(key: "-profilesettings-", value: "#{Rails.application.routes.url_helpers.url_for(controller: 'users', action: 'edit', id: user.id, host: "realgooddogrescue.heroku.com")}")
 

@@ -3,12 +3,12 @@
 <% if current_user && current_user.at_least_mod? %>
     <%= link_to "Create New Article", new_news_path %>
 <% end %>
-<% if @blogs.nil? %>
-    <div class="bs-callout bs-callout-info">
-        There are no blogs available
-    </div>
-<% else %>
+<% if @blogs.any? %>
     <% @blogs.each do |blog| %>
         <%= render blog, object: blog %>
     <% end %>
+<% else %>
+    <div class="bs-callout bs-callout-info">
+        <p>There are no news articles</p>
+    </div>
 <% end %>

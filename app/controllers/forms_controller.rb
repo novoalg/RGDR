@@ -77,10 +77,10 @@ class FormsController < ApplicationController
         @errors["Last Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
     end
 #age
-    if /\A\d+\Z/.match(params["age"]) && params["age"].to_i < 122 
+    if /\A\d+\Z/.match(params["age"]) && params["age"].to_i > 0 && params["age"].to_i < 122 
         @user["Your Age"] = params["age"]
     else
-        @errors["Age"] = "cannot be blank and be a number less than 122."
+        @errors["Age"] = "cannot be blank and be a number greater than 0 and less than 122."
     end
 #address
     if params["street_address"] && params["street_address"].length < 150

@@ -65,7 +65,7 @@ Your care in providing complete and accurate information is appreciated so that 
               <div class="row">
                 <div class="col-lg-2">
                   <%= label_tag "Your age", nil, class: "required" %>
-                  <%= text_field_tag "age", params[:age], class: "form-control" %>
+                  <%= number_field_tag "age", params[:age], within: 0..122, class: "form-control" %>
                 </div>
               </div>
 
