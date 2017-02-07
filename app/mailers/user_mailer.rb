@@ -102,9 +102,10 @@ class UserMailer < ApplicationMailer
             personalization = Personalization.new
             personalization.to = Email.new(email: 'rgdrtemp@gmail.com') #change to lisa's email once it works
             personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form["First Name"]} #{form["Last Name"]}")
+            personalization.substitutions = Substitution.new(key: '-fullnamesubject-', value: "#{form["First Name"]} #{form["Last Name"]}")
             @form = ""
             form.each do |k, v|
-                @form << "#{k}: #{v} </br>"
+                @form << "#{k}: #{v} <br>"
             end
             personalization.substitutions = Substitution.new(key: '-form-', value: @form)
             mail.template_id = "11aae390-cbe3-4b6f-88b8-81a26b1c94c9"

@@ -47,7 +47,7 @@ class FormsController < ApplicationController
             format.json { render json: @errors, status: :unprocessable_entity }
         else
             UserMailer.contact_email(@form).deliver
-            flash[:success] = "Your form was submitted successfully. An administrator will contact you sonn."
+            flash[:success] = "Your form was submitted successfully. An administrator will contact you soon."
             format.html { redirect_to "/contact_us" }
         end
     end
