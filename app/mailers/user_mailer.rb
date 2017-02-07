@@ -50,7 +50,7 @@ class UserMailer < ApplicationMailer
            @params.each do |k, v|
                @form << "<b>#{k}</b> <i>#{v}</i> <br>"
            end
-           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params["Your first name"]} #{form_params["Your last name"]}")
+           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params['Your first name']} #{form_params['Your last name']}")
            personalization.substitutions = Substitution.new(key: '-form-', value: @form)
            mail.template_id ="65bda34b-13ad-4adb-84a9-2d69b22babbb"
            mail.personalizations = personalization
@@ -69,7 +69,7 @@ class UserMailer < ApplicationMailer
            mail.subject = "#{form_params['Your first name']} #{form_params['Your last name']} has submitted an adoption form- Real Good Dog Rescue"
            personalization = Personalization.new
            personalization.to = Email.new(email: 'ltrenthem@gmail.com') 
-           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params["Your first name"]} #{form_params["Your last name"]}")
+           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params['Your first name']} #{form_params['Your last name']}")
            personalization.substitutions = Substitution.new(key: '-form-', value: @form)
            mail.template_id = "a7ee96fd-8266-4215-9ed8-f189f0a1271e"
            mail.personalizations = personalization
@@ -119,7 +119,7 @@ class UserMailer < ApplicationMailer
         else
             mail = Mail.new
             mail.from = Email.new(email: 'rgdrtemp@gmail.com')
-            mail.subject = "#{form[0]} #{form[1]} has contacted you - Real Good Dog Rescue"
+            mail.subject = "#{form['First Name']} #{form['Last Name']} has contacted you - Real Good Dog Rescue"
             personalization = Personalization.new
             personalization.to = Email.new(email: 'ltrenthem@gmail.com') 
             personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form['First Name']} #{form['Last Name']}")
