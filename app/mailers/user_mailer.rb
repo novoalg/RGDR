@@ -1,5 +1,6 @@
 class UserMailer < ApplicationMailer
-    include ActionView::Helpers::UrlHelper
+    #include ActionView::Helpers
+    #include Rails.application.routes.url_helpers
     default from: "rgdrtemp@gmail.com"
     require 'sendgrid-ruby'
     include SendGrid
@@ -13,8 +14,13 @@ class UserMailer < ApplicationMailer
         personalization = Personalization.new
         personalization.to = Email.new(email: @user.email)
         personalization.substitutions = Substitution.new(key: "-fullname-", value: @user.full_name)
-        personalization.substitutions = Substitution.new(key: "-confirmlink-", value: "#{link_to "Confirm Email", { controller: "users", action: "confirm_email", confirm_token: @user.confirm_token }}")
-        personalization.substitutions = Substitution.new(key: "-profilesettings-", value: "#{link_to "Profile Settings", edit_user_path(@user)}")
+        if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test'
+            personalization.substitutions = Substitution.new(key: "-confirmlink-", value: "#{Rails.application.routes.url_helpers.url_for(controller: 'users', action: 'confirm_email', confirm_token: @user.confirm_token, host: "localhost:3000")}")
+            personalization.substitutions = Substitution.new(key: "-profilesettings-", value: "#{Rails.application.routes.url_helpers.url_for(controller: 'users', action: 'edit', id: @user.id, host: "localhost:3000")}")
+        else
+            personalization.substitutions = Substitution.new(key: "-confirmlink-", value: "#{Rails.application.routes.url_helpers.url_for(controller: 'users', action: 'confirm_email', confirm_token: @user.confirm_token, host: "realgooddogrescue.heroku.com")}")
+            personalization.substitutions = Substitution.new(key: "-profilesettings-", value: "#{Rails.application.routes.url_helpers.url_for(controller: 'users', action: 'edit', id: @user.id, host: "realgooddogrescue.heroku.com")}")
+        end
         mail.template_id = "1cf09bc0-4dcb-4015-8fc7-ac179e726f85"
         mail.personalizations = personalization
         sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
