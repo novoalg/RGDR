@@ -10,6 +10,9 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/db/development
+/db/production
+/db/test
 *.swp
 
 # Ignore all logfiles and tempfiles.
