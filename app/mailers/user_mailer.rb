@@ -70,7 +70,7 @@ class UserMailer < ApplicationMailer
         personalization = Personalization.new
         personalization.to = Email.new(email: user.email)
         personalization.substitutions = Substitution.new(key: '-fullname-', value: @user.full_name)
-        personalization.substitutions = Substitution.new(key: '-resetlink-', value: "#{Rails.application.routes.url_helpers.url_for(controller: 'password_resets', action: 'edit', reset_token: @user.reset_token, email: @user.email, host: 'realgooddogrescue.heroku.com')}")
+        personalization.substitutions = Substitution.new(key: '-resetlink-', value: "#{Rails.application.routes.url_helpers.url_for(controller: 'PasswordResets', action: 'edit', reset_token: @user.reset_token, email: @user.email, host: 'realgooddogrescue.heroku.com')}")
         mail.template_id ="ffb64a81-578d-4d62-82e1-cd0790f40176"
         mail.personalizations = personalization
         sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
