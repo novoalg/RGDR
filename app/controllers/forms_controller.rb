@@ -13,13 +13,13 @@ class FormsController < ApplicationController
     @form = {}
 #first name
     if /\A\w+\Z/.match(params["first_name"]) && params["first_name"].length < 15
-        @form["Your first name"] = params["first_name"]
+        @form["First Name"] = params["first_name"]
     else
         @errors["First Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
     end
 #last name
     if /\A\w+\Z/.match(params["last_name"]) && params["last_name"].length < 15
-        @form["Your last name"] = params["last_name"]
+        @form["Last Name"] = params["last_name"]
     else
         @errors["Last Name"] = "cannot be blank, have numbers, and must be under 15 characters long."
     end
@@ -37,9 +37,9 @@ class FormsController < ApplicationController
     end
 
     if params["message"].length > 0 && params["message"].length < 400
-        @form["Your message"] = params["message"]
+        @form["Message"] = params["message"]
     else
-        @errors["Your message"] = "cannot be blank and cannot have length longer than 400 characters."
+        @errors["Message"] = "cannot be blank and cannot have length longer than 400 characters."
     end
     respond_to do |format|
         if @errors.any?
