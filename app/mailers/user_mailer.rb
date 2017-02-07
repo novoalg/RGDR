@@ -9,8 +9,8 @@ class UserMailer < ApplicationMailer
         mail = Mail.new
         mail.from = Email.new(email: 'rgdrtemp@gmail.com')
         mail.subject = 'Registration Confirmation - Real Good Dog Rescue'
-        mail.to = Email.new(email: @user.email)
         personalization = Personalization.new
+        personalization.to = Email.new(email: @user.email)
         personalization.substitutions = Substitution.new(key: "-fullname-", value: @user.full_name)
         personalization.substitutions = Substitution.new(key: "-confirmlink-", value: "#{link_to "Confirm Email", { controller: "users", action: "confirm_email", confirm_token: @user.confirm_token }}")
         personalization.substitutions = Substitution.new(key: "-profilesettings-", value: "#{link_to "Profile Settings", edit_user_path(@user)}")
