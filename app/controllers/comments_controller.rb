@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
   include ApplicationHelper
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :has_access, only: [:new, :edit, :update, :create, :destroy]
-  before_action :same_user, only: [:edit, :update, :destroy ]
+  before_action :same_user, only: [:edit, :update, :destroy]
+  before_action :has_access_moderator, only: [:destroy]
   before_action :banned_user, only: [:new, :create, :update, :destroy]
 
   # GET /comments/new
@@ -30,6 +31,7 @@ class CommentsController < ApplicationController
     @blog = Blog.find_by_id(params[:blog_id])
     @comment = @blog.comments.new(comment_params)
     @comment.user_id = current_user.id
+    @comment.deleted = false
     respond_to do |format|
       if @comment.save
         flash[:success] = "Thank you for your input!"
@@ -61,9 +63,11 @@ class CommentsController < ApplicationController
   # DELETE /comments/1.json
   def destroy
     comment = Comment.find_by_id(params[:id])
-    comment.update_attribute(content: "[deleted]")
+    @blog = Blog.find_by_id(params[:blog_id])
+    comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to @blog }
+      flash[:warning] = "Comment was deleted."
       format.json { head :no_content }
     end
   end
@@ -72,6 +76,10 @@ class CommentsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
       @comment = Comment.find(params[:id])
+      if !@comment
+          redirect_to root_path
+          flash[:error] = "We could not find that comment."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

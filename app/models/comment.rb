@@ -6,4 +6,5 @@ class Comment < ApplicationRecord
     validates :content, presence: true
     validates :user_id, presence: true
     validates :blog_id, presence: true
+
 end

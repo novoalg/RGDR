@@ -187,7 +187,7 @@ class UsersController < ApplicationController
 
     def no_admin_prevention
         if current_user
-            if (current_user.id == params[:id].to_i)
+            if (current_user.id == params[:id].to_i || (current_user.hierarchy > User.find_by_id(params[:id]).hierarchy))
                 flash[:info] = "You cannot do that."
                 redirect_to users_path
             else

@@ -105,6 +105,10 @@ class BlogsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_blog
       @blog = Blog.find_by_id(params[:id])
+      if !@blog
+          redirect_to root_path
+          flash[:error] = "We could not find that blog."
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
