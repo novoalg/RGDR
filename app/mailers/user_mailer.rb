@@ -39,6 +39,8 @@ class UserMailer < ApplicationMailer
        if ENV['RAILS_ENV'] == 'development' || ENV['RAILS_ENV'] == 'test'
             mail(to: email, subject: "Your adoption form has been submitted successfully - Real Good Dog Rescue")
        else
+           sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+            #email to person who submitted form
            mail = Mail.new
            mail.from = Email.new(email: 'rgdrtemp@gmail.com')
            mail.subject = 'Your adoption form has been submitted successfully - Real Good Dog Rescue'
@@ -52,7 +54,6 @@ class UserMailer < ApplicationMailer
            personalization.substitutions = Substitution.new(key: '-form-', value: @form)
            mail.template_id ="65bda34b-13ad-4adb-84a9-2d69b22babbb"
            mail.personalizations = personalization
-           sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
            begin 
                 response = sg.client.mail._("send").post(request_body: mail.to_json)
            rescue Exception => e
@@ -61,6 +62,26 @@ class UserMailer < ApplicationMailer
            puts response.status_code
            puts response.body
            puts response.headers
+
+            #email to lisa 
+           mail = Mail.new
+           mail.from = Email.new(email: 'rgdrtemp@gmail.com')
+           mail.subject = "#{form_params['Your first name']} #{form_params['Your last name']} has submitted an adoption form- Real Good Dog Rescue"
+           personalization = Personalization.new
+           personalization.to = Email.new(email: 'ltrenthem@gmail.com') 
+           personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form_params["Your first name"]} #{form_params["Your last name"]}")
+           personalization.substitutions = Substitution.new(key: '-form-', value: @form)
+           mail.template_id = "a7ee96fd-8266-4215-9ed8-f189f0a1271e"
+           mail.personalizations = personalization
+           begin 
+                response = sg.client.mail._("send").post(request_body: mail.to_json)
+           rescue Exception => e
+                puts e.message
+           end
+           puts response.status_code
+           puts response.body
+           puts response.headers
+
         end
     end
 
@@ -100,7 +121,7 @@ class UserMailer < ApplicationMailer
             mail.from = Email.new(email: 'rgdrtemp@gmail.com')
             mail.subject = "#{form[0]} #{form[1]} has contacted you - Real Good Dog Rescue"
             personalization = Personalization.new
-            personalization.to = Email.new(email: 'rgdrtemp@gmail.com') #change to lisa's email once it works
+            personalization.to = Email.new(email: 'ltrenthem@gmail.com') 
             personalization.substitutions = Substitution.new(key: '-fullname-', value: "#{form['First Name']} #{form['Last Name']}")
             personalization.substitutions = Substitution.new(key: '-fullnamesubject-', value: "#{form['First Name']} #{form['Last Name']}")
             @form = ""
