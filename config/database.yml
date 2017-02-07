@@ -14,7 +14,7 @@ development:
   <<: *default
   host: localhost
   username: rgdr
-  password: "rgdrpassword1"
+  password: <%= ENV["RGDR_DB_PW"] %>
   database: db/development
 
 # Warning: The database defined as "test" will be erased and
